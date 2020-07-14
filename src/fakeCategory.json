@@ -1,0 +1,36 @@
+[
+    {
+        "CategoryName": "Chinese",
+        "Restaurants": [
+            {
+                "name": "海底捞",
+                "location": "8081 Westminster Hwy Unit 701, Richmond, BC V6X 1A7",
+                "telephone": "1-60437066",
+                "rate": "4.83"
+            },
+            {
+                "name": "重庆刘一手火锅(Richmond)",
+                "location": "150-4731 Garden city Rd, Richmond, BC",
+                "telephone": "1-xxxxxxxx",
+                "rate": "4.51"
+            }
+        ]
+    },
+    {
+        "CategoryName": "Japanese",
+        "Restaurants": [
+            {
+                "name": "Miku Restaurant",
+                "location": "200 Granville St #70, Vancouver, BC, V6C 1S4",
+                "telephone": "1-xxxxxxxx",
+                "rate": "4.88"
+            },
+            {
+                "name": "Togo Sushi (SFU)",
+                "location": "9055 University High St, Burnaby, BC V5A 0A7",
+                "telephone": "1-xxxxxxxx",
+                "rate": "3.88"
+            }
+        ]
+    }
+]

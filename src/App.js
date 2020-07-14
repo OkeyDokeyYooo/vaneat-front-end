@@ -1,14 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
+import {
+  Switch,
+  Route
+} from "react-router-dom";
+
 import './App.css';
 
 // components
-import Main from './components/Main';
+import MainPage from './components/MainPage/MainPage';
+import Restaurants from './components/Restaurants/Restaurants';
+import CategoryPage from './components/Category/CategoryPage'
 
 function App() {
   return (
     <div className="App">
-      <Main name={'WeiJie'}/>
+      <Switch>
+        <Route exact path="/" component={MainPage} />
+
+        <Route path="/restaurants" component={Restaurants} />
+        
+        <Route path="/category/:catName" component={CategoryPage} />
+      </Switch>
     </div>
   );
 }
