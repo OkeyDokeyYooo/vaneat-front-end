@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-
+import ReactStars from "react-rating-stars-component";
 import fake from '../../fakeCategory.json'
 
 const CategoryPage = (props) => {
@@ -26,7 +26,7 @@ const CategoryPage = (props) => {
                             <h5>{restaurant.name}</h5>
                             <h6>{restaurant.location}</h6>
                             <h6>{restaurant.telephone}</h6>
-                            <h6>{restaurant.rate}</h6>
+                            <ReactStars count={5} edit={false} value={restaurant.rate}/>
                             <hr />
                         </div>
                     )

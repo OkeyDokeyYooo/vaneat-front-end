@@ -18,7 +18,7 @@ function App() {
         <Route exact path="/" component={MainPage} />
 
         <Route path="/restaurants" component={Restaurants} />
-        
+
         <Route path="/category/:catName" component={CategoryPage} />
       </Switch>
     </div>
