@@ -9,6 +9,37 @@ header {
     background: lightcoral;
 }
 
+#main-page-header-log-in {
+    float: right;
+}
+
+#main-page-header-log-in :hover{
+    cursor: pointer;
+}
+
+#svg-container {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+#main-page-header-log-in svg {
+    width: 20px;
+    height: 20px;
+    margin: 0 auto;
+    display: block;
+}
+
+#main-page-header-log-in span{
+    color: #fff;
+    font-weight: 800;
+    display: inline-block;
+    font-size: 20px;
+    vertical-align: middle;
+    margin-left: 0.5em;
+}
+
+
 main {
     padding: 2rem;
     background: pink;
@@ -18,3 +49,115 @@ footer {
     background: lightblue;
     padding: 2rem;
 }
+
+#pop-up-window {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 25vw;
+    min-height: 40vh;
+    border-radius: 10px;
+    background-color: white;
+    text-align: center;
+    padding: 1em;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0px -2px 4px 0px rgba(0, 0, 0, 0.05);
+}
+
+.pop-up-window-background {
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+#pop-up-window-header {
+    font-size: 1.3em;
+    z-index: 2;
+}
+
+#pop-up-window-body {
+    margin: 2em auto 0;
+    width: 90%;
+    overflow: auto;
+}
+
+#log-in-btn {
+    background: white;
+    outline: none;
+    border: 1px solid #8D9499;
+    border-radius: 4px;
+    width: 100%;
+    height: 4em;
+    font-size: 1em;
+    padding: 0.5em;
+    color: #8D9499;
+}
+
+#log-in-btn:hover{
+    background-color: #F5F5F5;
+}
+
+#log-in-btn:not(:first-child) {
+    margin-top: 1em;
+}
+
+#log-in-btn svg {
+    height: 20px;
+    width: 20px;
+    margin: 0 auto;
+    display: block;
+    margin-right: 0.5em;
+}
+
+#log-in-btn span {
+    color: #8D9499;
+    font-weight: bolder;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+#third-party-log-in-section {
+    margin-bottom: 2em;
+}
+
+#split-line {
+    width: 100%;
+    display: flex;
+    height: 20px;
+}
+
+#split-line-half {
+    align-self: center;
+    border-bottom: 1px solid #F2F4F5;
+    width: 45%;
+}
+
+#split-line span {
+    width: 10%;
+    color: #8D9499;
+    font-size: smaller;
+}
+
+#log-in-section {
+    margin: 1.5em 0;
+}
+
+#pop-up-window-bottom {
+    border-top: 1px solid #F2F4F5;
+    margin: 0 -1em;
+    padding-top: 0.5em;
+    color: #8D9499;
+}
+
+#pop-up-window-bottom a {
+    cursor: pointer;
+    color: rgb(0, 108, 187);
+    text-decoration: none;
+}
+

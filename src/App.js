@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {
   Switch,
   Route
@@ -10,18 +10,25 @@ import MainPage from './components/MainPage/MainPage';
 import Restaurants from './components/Restaurants/Restaurants';
 import CategoryPage from './components/Category/CategoryPage'
 
-function App() {
-  return (
-    <div className="App">
+class App extends Component {
+
+  componentDidMount() {
+    // call api to fetch info
+  }
+
+  render() {
+    return (
+      <div className="App">
       <Switch>
-        <Route exact path="/" component={MainPage} />
+        <Route path="/" component={MainPage} />
 
         <Route path="/restaurants" component={Restaurants} />
 
         <Route path="/category/:catName" component={CategoryPage} />
       </Switch>
     </div>
-  );
+    )
+  }
 }
 
 export default App;
