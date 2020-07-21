@@ -4,7 +4,6 @@ import {
   Route
 } from "react-router-dom";
 
-import './App.css';
 
 // components
 import MainPage from './components/MainPage/MainPage';

@@ -1,12 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+import './MainPage.css'
+
 const MainPage = (props) => {
     return (
-        <div>
-            首页
-            <hr/>
-            <Link to="/restaurants">All restaurants</Link>
+        <div className="main-page">
+            <header>Header</header>
+            <main>
+                <Link to="/restaurants">All restaurants</Link>
+            </main>
+            <footer>Footer</footer>
         </div>
     )
 }

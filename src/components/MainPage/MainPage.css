@@ -1,0 +1,20 @@
+.main-page {
+    display: grid;
+    height: 100vh;
+    grid-template-rows: auto 1fr auto;
+}
+
+header {
+    padding: 2rem;
+    background: lightcoral;
+}
+
+main {
+    padding: 2rem;
+    background: pink;
+}
+
+footer {
+    background: lightblue;
+    padding: 2rem;
+}
