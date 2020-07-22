@@ -2,11 +2,32 @@
     display: grid;
     height: 100vh;
     grid-template-rows: auto 1fr auto;
+    background: 
+    linear-gradient(
+      rgba(0, 0, 0, 0.1),
+      rgba(0, 0, 0, 0.1)
+    ),
+    url('../../img/background.jpg');
+    /* background-position: center; */
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+button:focus {
+    outline: 0;
 }
 
 header {
     padding: 2rem;
-    background: lightcoral;
+    /* background: lightcoral; */
+}
+
+#main-page-header-logo span{
+    color: #fff;
+    font-weight: 800;
+    display: inline-block;
+    font-size: 20px;
 }
 
 #main-page-header-log-in {
@@ -42,11 +63,41 @@ header {
 
 main {
     padding: 2rem;
-    background: pink;
+    /* background: pink; */
+    text-align: center;
 }
 
+#main-body {
+    margin: 15vh auto;
+}
+
+#main-body h3 {
+    color: #fff;
+    font-weight: 800;
+    font-size: 50px;
+}
+
+#main-body button {
+    text-decoration: none;
+    height: 4em;
+    width: 60%;
+    background: #BE1028;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-weight: 800;
+    font-size: 1.2em;
+    letter-spacing: 1px;
+}
+
+#main-body button:hover {
+    cursor: pointer;
+    filter: brightness(80%);
+}
+
+
 footer {
-    background: lightblue;
+    /* background: lightblue; */
     padding: 2rem;
 }
 

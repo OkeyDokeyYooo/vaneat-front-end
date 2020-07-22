@@ -1,0 +1,26 @@
+[
+    {
+        "CatName": "Chinese",
+        "img": "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fcdn-image.myrecipes.com%2Fsites%2Fdefault%2Ffiles%2Fstyles%2F4_3_horizontal_-_1200x900%2Fpublic%2F1502987547%2FGettyImages-545286388.jpg%3Fitok%3DkGrhiiMo"
+    },
+    {
+        "CatName": "Japanese",
+        "img": "https://upload.wikimedia.org/wikipedia/commons/5/57/Oseti.jpg"
+    },
+    {
+        "CatName": "Korean",
+        "img": "https://cdn.cnn.com/cnnnext/dam/assets/181114130138-korean-food-2620014201204004k-jeonju-bibimbap-super-169.jpg"
+    },
+    {
+        "CatName": "Chinese",
+        "img": "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fcdn-image.myrecipes.com%2Fsites%2Fdefault%2Ffiles%2Fstyles%2F4_3_horizontal_-_1200x900%2Fpublic%2F1502987547%2FGettyImages-545286388.jpg%3Fitok%3DkGrhiiMo"
+    },
+    {
+        "CatName": "Japanese",
+        "img": "https://upload.wikimedia.org/wikipedia/commons/5/57/Oseti.jpg"
+    },
+    {
+        "CatName": "Korean",
+        "img": "https://cdn.cnn.com/cnnnext/dam/assets/181114130138-korean-food-2620014201204004k-jeonju-bibimbap-super-169.jpg"
+    }
+]

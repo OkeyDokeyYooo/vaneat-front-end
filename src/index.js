@@ -4,6 +4,20 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {  BrowserRouter as Router } from 'react-router-dom';
+// import {createStore} from 'redux';
+
+ 
+
+// Redux Store
+
+
+// Action
+
+
+// Reducer
+
+
+// Dispatch
 
 ReactDOM.render(
   <React.StrictMode>
