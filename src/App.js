@@ -7,7 +7,7 @@ import {
 
 // components
 import HomePage from './components/HomePage/HomePage';
-import Restaurants from './components/Restaurants/Restaurants';
+import MainPage from './components/Restaurants/MainPage';
 class App extends Component {
 
   componentDidMount() {
@@ -18,7 +18,7 @@ class App extends Component {
     return (
       <div className="App">
       <Switch>
-        <Route path="/restaurants" component={Restaurants} />
+        <Route path="/restaurants" component={MainPage} />
 
         <Route path="/" component={HomePage} />
 

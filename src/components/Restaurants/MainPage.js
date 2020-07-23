@@ -15,7 +15,7 @@ const MainPage = () => {
         <div id="restaurant-main-page">
             <Header />
             <Slider />
-            <RestList />
+            {/* <RestList /> */}
             <Switch>
                 <Route path='/restaurants/login' component={LoginWindow}/>
                 <Route path='/restaurants/signup' component={SignupWindow}/>
