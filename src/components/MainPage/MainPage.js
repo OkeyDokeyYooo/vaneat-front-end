@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link, Switch, Route, } from 'react-router-dom'
-import Slider from "react-slick";
 
 // icons
 import {FaRegUserCircle} from 'react-icons/fa'
@@ -11,41 +10,6 @@ import SignupWindow from '../Widgets/SignupWindow'
 
 import './MainPage.css'
 
-import cats from '../../fakeCat.json'
-
-const CatItem = (props) => {
-    return (
-        <div>
-            {/* <img src={props.img} alt={props.title}/> */}
-            <h3>{props.title}</h3>
-        </div>
-    )
-}
-
-const Test = () => {
-    var settings = {
-      dots: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 3,
-      slidesToScroll: 3
-    };
-
-    return (
-        <div style={{width: '90vw'}}>
-            <Slider {...settings}>
-                {
-                    cats.map((cat, i) => {
-                        return (
-                            <CatItem title={cat.CatName} img={cat.img} key={i}/>
-                        )
-                    })
-                }
-            </Slider>
-        </div>
-
-    )
-  }
 
 const MainPage = (props) => {
 

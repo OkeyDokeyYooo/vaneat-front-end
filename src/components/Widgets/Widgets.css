@@ -40,3 +40,15 @@
 .RestDiv{
     background-color: white;
 }
+
+/* Header */
+#restaurant-header {
+    background-color: #fff;
+}
+
+#restaurant-header-logo span{
+    color: black;
+    font-weight: 800;
+    display: inline-block;
+    font-size: 20px;
+}

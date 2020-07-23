@@ -1,20 +1,17 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-import fake from '../../fakeCategory.json';
+// component
+import Slider from '../Widgets/Sliders'
+import Header from '../Widgets/Header'
+
+import './MainPage.css'
 
 const MainPage = () => {
     return (
-        <div>
-            <ul>
-                {fake.map((cat, i) => {
-                    return (
-                        <li key={i}>
-                            <Link to={`/category/${cat.CategoryName}`} > {cat.CategoryName} </Link>
-                        </li>
-                    )
-                })}
-            </ul>
+        <div id="restaurant-main-page">
+            <Header />
+            <Slider />
         </div>
     )
 }
