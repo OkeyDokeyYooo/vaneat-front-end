@@ -1,9 +1,11 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Switch, Route} from 'react-router-dom';
 
 // component
 import Slider from '../Widgets/Sliders'
 import Header from '../Widgets/Header'
+import LoginWindow from "../Widgets/LoginWindow"
+import SignupWindow from "../Widgets/SignupWindow"
 
 import './MainPage.css'
 
@@ -12,6 +14,10 @@ const MainPage = () => {
         <div id="restaurant-main-page">
             <Header />
             <Slider />
+            <Switch>
+                <Route path='/restaurants/login' component={LoginWindow}/>
+                <Route path='/restaurants/signup' component={SignupWindow}/>
+            </Switch>
         </div>
     )
 }

@@ -8,24 +8,24 @@ import {FaRegUserCircle} from 'react-icons/fa'
 import LoginWindow from '../Widgets/LoginWindow'
 import SignupWindow from '../Widgets/SignupWindow'
 
-import './MainPage.css'
+import './HomePage.css'
 
 
-const MainPage = (props) => {
+const HomePage = (props) => {
 
     return (
-        <div className="main-page">
+        <div className="home-page">
             <header >
-                <Link id="main-page-header-logo" to="/">
+                <Link id="home-page-header-logo" to="/">
                     <span>LOGO</span>
                 </Link>
-                <Link id="main-page-header-log-in" to="/login">
+                <Link id="home-page-header-log-in" to="/login">
                     <span id="svg-container"><FaRegUserCircle/></span>
                     <span>LOG IN</span>
                 </Link>    
             </header>
             <main>
-                <div id="main-body">
+                <div id="home-body">
                     <h3>One Thousand Flavours In One Place</h3>
                     <Link to="/restaurants"><button>LET'S GO EXPLORE</button></Link>
                 </div>
@@ -39,4 +39,4 @@ const MainPage = (props) => {
     )
 }
 
-export default MainPage;
+export default HomePage;

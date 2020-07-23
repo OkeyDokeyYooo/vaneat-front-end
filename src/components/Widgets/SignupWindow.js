@@ -1,6 +1,6 @@
 import React, {useState}from 'react'
 import OutsideClickHandler from 'react-outside-click-handler';
-import {useHistory, Link} from 'react-router-dom'
+import {useHistory, Link, withRouter} from 'react-router-dom'
 
 
 // material ui
@@ -186,25 +186,27 @@ const SignupForm = () => {
 }
 
 
-const SignupWindow = () => {
+const SignupWindow = (props) => {
 
     const history = useHistory()
+
+    const pathname = props.location.pathname.replace("/signup", "")
 
     return (
         <div className="pop-up-window-background">
             <OutsideClickHandler 
-                onOutsideClick={() => history.push('/')}
+                onOutsideClick={() => history.push(pathname)}
             >
                 <div id="pop-up-window">
                     <div id="pop-up-window-header">
-                        <BsX style={{float: 'left', color: "rgba(0, 0, 0, 0.54)", fontSize: "1.5em"}} onClick={() => history.push('/')}/>
+                        <BsX style={{float: 'left', color: "rgba(0, 0, 0, 0.54)", fontSize: "1.5em"}} onClick={() => history.push(pathname)}/>
                         Sign Up For An Account
                     </div>
                     <div id="pop-up-window-body">
                         <SignupForm />
                     </div>
                     <div id="pop-up-window-bottom">
-                        <p>Already Have An Account? <Link to='/login'>Log In</Link></p>
+                        <p>Already Have An Account? <Link to={`${pathname}/login`}>Log In</Link></p>
                     </div>
                 </div>
             </OutsideClickHandler>
@@ -212,4 +214,4 @@ const SignupWindow = () => {
     )
 }
 
-export default SignupWindow
+export default withRouter(SignupWindow)

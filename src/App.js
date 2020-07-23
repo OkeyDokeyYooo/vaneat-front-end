@@ -6,14 +6,8 @@ import {
 
 
 // components
-import MainPage from './components/MainPage/MainPage';
+import HomePage from './components/HomePage/HomePage';
 import Restaurants from './components/Restaurants/Restaurants';
-import CategoryPage from './components/Category/CategoryPage'
-
-
-
-
-
 class App extends Component {
 
   componentDidMount() {
@@ -26,9 +20,7 @@ class App extends Component {
       <Switch>
         <Route path="/restaurants" component={Restaurants} />
 
-        <Route path="/category/:catName" component={CategoryPage} />
-
-        <Route path="/" component={MainPage} />
+        <Route path="/" component={HomePage} />
 
       </Switch>
     </div>

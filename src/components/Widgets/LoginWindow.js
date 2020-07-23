@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { GoogleLogin } from 'react-google-login'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import OutsideClickHandler from 'react-outside-click-handler';
-import {useHistory, Link} from 'react-router-dom'
+import {useHistory, Link, withRouter} from 'react-router-dom'
 
 // material ui
 import {TextField, InputAdornment, IconButton, FormControl, InputLabel, FilledInput} from '@material-ui/core';
@@ -35,9 +35,98 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+const loginInitState = {
+    email: '',
+    password: '',
+    showPassword: false,
+    emailError: '',
+    passwordError: '',
+}
+
+const LoginForm = () => {
+    const classes = useStyles()
+
+    const [values, setValues] = useState(loginInitState)
+
+    const handleChange = (prop) => (event) => {
+        setValues({ ...values, [prop]: event.target.value });
+    };
+
+    const handleClickShowPassword = () => {
+        setValues({ ...values, showPassword: !values.showPassword });
+    }
+    
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    }
+
+    const validateInput = () => {
+        let emailError = ''
+
+        // check email is valid format 
+        const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (!re.test(values.email)){
+            emailError = 'The input is not a valid email address'
+        }
+
+        if (emailError) {
+            setValues({
+                ...values,
+                emailError
+            })
+            return false
+        }
+
+        return true
+    }
+
+    const handleLogin = event => {
+        event.preventDefault()
+        event.preventDefault()
+        const isValid = validateInput()
+        if (isValid) {
+            console.log(values)
+            setValues(loginInitState)
+        }
+    }
+
+    return (
+        <form id="login-in-form" className={classes.root} onSubmit={handleLogin}>
+            <TextField 
+                variant="filled" 
+                error={values.emailError !== '' ? true : false}
+                helperText={values.emailError !== '' ? values.emailError : ''}    
+                label="Email" 
+                onChange={handleChange('email')}
+            />
+            <FormControl variant="filled">
+                <InputLabel htmlFor="filled-adornment-password">Password</InputLabel>
+                    <FilledInput
+                        id="filled-adornment-password"
+                        type={values.showPassword ? 'text' : 'password'}
+                        value={values.password}
+                        onChange={handleChange('password')}
+                        endAdornment={
+                            <InputAdornment position="end">
+                                <IconButton
+                                aria-label="toggle password visibility"
+                                onClick={handleClickShowPassword}
+                                onMouseDown={handleMouseDownPassword}
+                                edge="end"
+                                >
+                                {values.showPassword ? <MdVisibility /> : <MdVisibilityOff />}
+                                </IconButton>
+                            </InputAdornment>
+                        }
+                    />
+            </FormControl>
+            <button className={classes.button} type="submit">LOG IN</button>
+        </form>
+    )
+}
+
 const LoginWindow = (props) => {
 
-    const classes = useStyles()
     const [showLoginForm, setShowLoginForm] = useState(false)
     const history = useHistory()
 
@@ -54,97 +143,16 @@ const LoginWindow = (props) => {
         )
     }
 
-    const LoginForm = () => {
-
-        const [values, setValues] = useState({
-            email: '',
-            password: '',
-            showPassword: false,
-            emailError: '',
-            passwordError: '',
-        })
-
-        const handleChange = (prop) => (event) => {
-            setValues({ ...values, [prop]: event.target.value });
-        };
-
-        const handleClickShowPassword = () => {
-            setValues({ ...values, showPassword: !values.showPassword });
-        }
-        
-        const handleMouseDownPassword = (event) => {
-            event.preventDefault();
-        }
-
-        const validateInput = () => {
-            let emailError = ''
-
-            // check email is valid format 
-            const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            if (!re.test(values.email)){
-                emailError = 'The input is not a valid email address'
-            }
-
-            if (emailError) {
-                setValues({
-                    ...values,
-                    emailError
-                })
-                return false
-            }
-
-            return true
-        }
-
-        const handleLogin = event => {
-            event.preventDefault()
-            console.log(event)
-        }
-
-        return (
-            <form id="login-in-form" className={classes.root} onSubmit={handleLogin}>
-                <TextField 
-                    variant="filled" 
-                    error={values.emailError !== '' ? true : false}
-                    helperText={values.emailError !== '' ? values.emailError : ''}    
-                    label="Email" 
-                    onChange={handleChange('email')}
-                />
-                <FormControl variant="filled">
-                    <InputLabel htmlFor="filled-adornment-password">Password</InputLabel>
-                        <FilledInput
-                            id="filled-adornment-password"
-                            type={values.showPassword ? 'text' : 'password'}
-                            value={values.password}
-                            onChange={handleChange('password')}
-                            endAdornment={
-                                <InputAdornment position="end">
-                                    <IconButton
-                                    aria-label="toggle password visibility"
-                                    onClick={handleClickShowPassword}
-                                    onMouseDown={handleMouseDownPassword}
-                                    edge="end"
-                                    >
-                                    {values.showPassword ? <MdVisibility /> : <MdVisibilityOff />}
-                                    </IconButton>
-                                </InputAdornment>
-                            }
-                        />
-                </FormControl>
-                <button className={classes.button} type="submit">LOG IN</button>
-            </form>
-        )
-    }
-
+    const pathname = props.location.pathname.replace("/login", "")
 
     return (
         <div className="pop-up-window-background">
             <OutsideClickHandler
-                onOutsideClick={() => history.push('/')}
+                onOutsideClick={() => history.push(pathname)}
             >
                 <div id="pop-up-window">
                     <div id="pop-up-window-header">
-                        <BsX style={{float: 'left', color: "rgba(0, 0, 0, 0.54)", fontSize: "1.5em"}} onClick={() => history.push('/')}/>
+                        <BsX style={{float: 'left', color: "rgba(0, 0, 0, 0.54)", fontSize: "1.5em"}} onClick={() => history.push(pathname)}/>
                         Log In To Trip Advisor
                     </div>
                     <div id="pop-up-window-body">
@@ -189,7 +197,7 @@ const LoginWindow = (props) => {
                         </section>
                     </div>
                     <div id="pop-up-window-bottom">
-                        <p>Need an account? <Link to='/signup'>Sign up</Link></p>
+                        <p>Need an account? <Link to={`${pathname}/signup`}>Sign up</Link></p>
                     </div>
                 </div>
             </OutsideClickHandler>
@@ -197,4 +205,4 @@ const LoginWindow = (props) => {
     )
 }
 
-export default LoginWindow
+export default withRouter(LoginWindow)

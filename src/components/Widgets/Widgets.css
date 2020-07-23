@@ -44,11 +44,52 @@
 /* Header */
 #restaurant-header {
     background-color: #fff;
+    padding: 1em;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#restaurant-header-logo {
+    float: left;
 }
 
 #restaurant-header-logo span{
-    color: black;
+    color: #8D9499;
     font-weight: 800;
     display: inline-block;
     font-size: 20px;
+}
+
+#restaurant-header-log-in {
+    float: right;
+    display: block;
+}
+
+#restaurant-header-log-in :hover{
+    cursor: pointer;
+}
+
+
+#restaurant-header-log-in svg {
+    width: 20px;
+    height: 20px;
+    margin: 0 auto;
+    display: block;
+}
+
+#restaurant-header-log-in span{
+    color: #8D9499;
+    font-weight: 800;
+    display: inline-block;
+    font-size: 20px;
+    vertical-align: middle;
+    margin-left: 0.5em;
+}
+
+#restaurant-header-search-bar {
+    width: 300px;
+    display: inline-block;
+    margin: 0 auto;
 }
