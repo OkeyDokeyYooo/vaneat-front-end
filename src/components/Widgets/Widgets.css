@@ -1,0 +1,42 @@
+.catclass{
+    display: inline-block;
+    margin: 0 auto;
+    position: relative;
+    border-radius: 4px;
+    padding-top: 50px;
+    padding-left: 50px;
+    
+}
+
+#tittle{
+    position: absolute;
+    bottom: 10px;
+    display: inline-block;
+    left: 70px;
+    font-size: 2em;
+    color: #fff;
+    
+}
+
+.catclass img {
+    -webkit-filter: grayscale(20%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(20%);
+    float: left;
+    width:  300px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 4px;
+
+}
+
+
+
+.slider-continer {
+    width: 80vw;
+    margin: 0 auto;
+    
+}
+
+.RestDiv{
+    background-color: white;
+}
