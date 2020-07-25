@@ -6,9 +6,7 @@ import fake from '../../fakeRest.json';
 
 const RestItems = () => {
     return (
-    <div className="RestDiv">
-        <h2>Popular Restaurant</h2>
-        <div className="RestUl">
+        <div className="restaurant-list">
             {
                 fake.map((cats,index)=>{
                     return(
@@ -18,12 +16,14 @@ const RestItems = () => {
                                 location={cats.location}
                                 tel={cats.telephone}
                                 rate={cats.rate}
+                                numOfRate={cats.numOfRate}
+                                dollar={cats.dollar}
+                                type={cats.type}
                                 key={index}
                             />
                     )
             })}
         </div>
-    </div>
     )
 }
 

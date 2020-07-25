@@ -30,7 +30,7 @@ const HomePage = (props) => {
                     <Link to="/restaurants"><button>LET'S GO EXPLORE</button></Link>
                 </div>
             </main>
-            <footer>Footer</footer>
+            {/* <footer>Footer</footer> */}
             <Switch>
                 <Route exact path='/login' component={LoginWindow}/>
                 <Route exact path='/signup' component={SignupWindow}/>

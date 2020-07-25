@@ -1,5 +1,6 @@
 import React from 'react';
 import {Switch, Route} from 'react-router-dom';
+import { StickyContainer, Sticky } from 'react-sticky';
 
 // component
 import Slider from '../Widgets/Sliders'
@@ -14,8 +15,12 @@ const MainPage = () => {
     return (
         <div id="restaurant-main-page">
             <Header />
-            <Slider />
-            <RestList />
+            <div id="restaurant-main-page-body">
+                <div className="body-header">Cuisines & Categories</div>
+                <Slider />
+                <div className="body-header">Popular Restaurants</div>
+                <RestList />
+            </div>
             <Switch>
                 <Route path='/restaurants/login' component={LoginWindow}/>
                 <Route path='/restaurants/signup' component={SignupWindow}/>

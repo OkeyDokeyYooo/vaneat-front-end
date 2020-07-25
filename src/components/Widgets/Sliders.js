@@ -7,28 +7,24 @@ import './Widgets.css'
 export default class MultipleItems extends Component {
   render() {
     const settings = {
-      dots: true,
+      dots: false,
       infinite: true,
-      speed: 500,
-      slidesToShow: 2,
-      slidesToScroll: 3
-    };
+      speed: 300,
+      slidesToShow: 4,
+      slidesToScroll: 4,
+  };
     
     return (
-      <div>
-        <div className="slider-continer">
-          <Slider {...settings}>
-            {
-              cats.map((cat,i)=>{
-                return(
-                  <CatItem title={cat.CatName} 
-                    img={cat.img} key={i}/>
-                )
-              })
-            }
-          </Slider>
-        </div>
-      </div>
+      <Slider {...settings}>
+        {
+          cats.map((cat,i)=>{
+            return(
+              <CatItem title={cat.CatName} 
+                img={cat.img} key={i}/>
+            )
+          })
+        }
+      </Slider>
     );
   }
 }
