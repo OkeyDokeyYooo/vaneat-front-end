@@ -5,36 +5,32 @@
     border-radius: 4px;
 }
 
+.catclass img {
+    float: left;
+    width:  224px;
+    height: 142px;
+    object-fit: cover;
+    border-radius: 4px;
+    /* Here's the trick */
+    background-size: cover;
+    position: relative;
+}
+
 #tittle{
     position: absolute;
-    bottom: 10px;
+    bottom: 5px;
     display: inline-block;
-    left: 70px;
-    font-size: 2em;
+    left: 10px;
+    font-size: 1em;
+    font-weight: bold;
     color: #fff;
-    
 }
 
 .slick-next:before, .slick-prev:before {
     color: black;
 }
 
-.catclass img {
-    -webkit-filter: grayscale(20%); /* Safari 6.0 - 9.0 */
-    filter: grayscale(20%);
-    float: left;
-    width:  224px;
-    height: 142px;
-    object-fit: cover;
-    border-radius: 4px;
 
-}
-
-.slider-continer {
-    width: 80vw;
-    margin: 0 auto;
-    
-}
 
 /* Header */
 #restaurant-header {

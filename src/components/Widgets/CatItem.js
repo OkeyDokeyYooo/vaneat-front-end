@@ -1,15 +1,17 @@
 import React from 'react';
-import {Link} from 'react-router-dom'
 
 import '../Widgets/Widgets.css'
 
 const CatItem = (props) =>{
+
+    const imageStyle = {
+        backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6) ), url(${props.img})`
+    }
+
     return(
         <div className='catclass'>
-            <Link to={`/category/${props.title}`}>
-                <img src={props.img} alt={props.title}/>
-                <span id="tittle">{props.title}</span>
-            </Link>
+            <img style={imageStyle} alt=""/>
+            <span id="tittle">{props.title}</span>
         </div>
     )
 }

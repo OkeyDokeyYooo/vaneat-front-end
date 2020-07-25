@@ -1,6 +1,5 @@
 import React from 'react';
 import {Switch, Route} from 'react-router-dom';
-import { StickyContainer, Sticky } from 'react-sticky';
 
 // component
 import Slider from '../Widgets/Sliders'
