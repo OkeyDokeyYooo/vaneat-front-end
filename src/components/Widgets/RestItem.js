@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useState} from 'react';
 import Rating from '@material-ui/lab/Rating';
 import { withStyles } from '@material-ui/core/styles';
@@ -36,7 +37,7 @@ const RestItem = (props) =>{
                 <div id='rest-name'>{props.name}</div>
                 <div id='restaurant-item-rate-wrapper'>
                     <StyledRating 
-                        value={props.rate} 
+                        value={Number(props.rate)} 
                         readOnly 
                         precision={0.5}
                         size={"small"}    

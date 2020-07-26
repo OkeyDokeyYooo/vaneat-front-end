@@ -1,8 +1,13 @@
+/* eslint-disable no-useless-escape */
 import React, {useState} from 'react'
 import { GoogleLogin } from 'react-google-login'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import OutsideClickHandler from 'react-outside-click-handler';
-import {useHistory, Link, withRouter} from 'react-router-dom'
+import { useHistory, Link, withRouter } from 'react-router-dom'
+
+// redux
+import { useDispatch } from 'react-redux'
+import { googleLogin, facebookLogin } from '../../actions/userAction'
 
 // material ui
 import {TextField, InputAdornment, IconButton, FormControl, InputLabel, FilledInput} from '@material-ui/core';
@@ -94,6 +99,7 @@ const LoginForm = () => {
         <form id="login-in-form" className={classes.root} onSubmit={handleLogin}>
             <TextField 
                 variant="filled" 
+                type="email"
                 error={values.emailError !== '' ? true : false}
                 helperText={values.emailError !== '' ? values.emailError : ''}    
                 label="Email" 
@@ -130,8 +136,17 @@ const LoginWindow = (props) => {
     const [showLoginForm, setShowLoginForm] = useState(false)
     const history = useHistory()
 
-    const responseLogin = (res) => {
-        console.log(res)
+    // redux
+    const dispatch = useDispatch()
+
+    const handleGoogleLogin = (res) => {
+        dispatch(googleLogin(res.profileObj))
+        history.goBack()
+    }
+
+    const handleFacebookLogin = (res) => {
+        dispatch(facebookLogin(res))
+        history.goBack()
     }
 
     const LoginButton = (props) => {
@@ -160,8 +175,8 @@ const LoginWindow = (props) => {
                             <GoogleLogin
                                 clientId="1017526824029-2bmodiavf0sdhiegcf7iua2gvln4d8nt.apps.googleusercontent.com"
                                 buttonText="Login"
-                                onSuccess={responseLogin}
-                                onFailure={responseLogin}
+                                onSuccess={handleGoogleLogin}
+                                onFailure={handleGoogleLogin}
                                 isSignedIn={true}
                                 cookiePolicy={'single_host_origin'}
                                 render={renderProps => (
@@ -172,7 +187,7 @@ const LoginWindow = (props) => {
                                 appId="1014300172362283"
                                 fields="name,email,picture"
                                 icon="fa-facebook"
-                                callback={responseLogin} 
+                                callback={handleFacebookLogin} 
                                 render={renderProps => (
                                     <LoginButton onClick={renderProps.onClick} title={"CONTINUE WITH FACEBOOK"} icon={<FaFacebookSquare style={{color: '#3b5998'}}/>}/>
                                 )}

@@ -3,6 +3,9 @@ import {Link, withRouter} from 'react-router-dom'
 import {TextField, makeStyles} from '@material-ui/core'
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
+// redux
+import { useSelector } from 'react-redux'
+
 // icons
 import {FaRegUserCircle} from 'react-icons/fa'
 
@@ -41,10 +44,17 @@ const SearchBar = () => {
 
     const classes = useStyles();
 
+    // when use click enter, then start search weather we have the restaurant
+    const handleChange  = (event) => {
+        console.log(event.target.value)
+    }
+
     return (
         <div id="restaurant-header-search-bar">
             <Autocomplete
                 freeSolo
+                loadingText={'Loading...'}
+                onChange={e => handleChange(e)}
                 options={topRestaurants.map(option => option.name)}
                 renderInput={(params) => (
                     <TextField 
@@ -52,7 +62,7 @@ const SearchBar = () => {
                         className={classes.root}
                         size="small"
                         margin="normal" 
-                        variant="outlined" 
+                        variant="outlined"
                         placeholder="Search for Restaurant"
                     />
                 )}
@@ -64,16 +74,28 @@ const SearchBar = () => {
 
 
 const Header = (props) => {
+
+    const user = useSelector(state => state.user)
+
+    console.log(user.isLogIn)
+
     return (
         <header id="restaurant-header">
             <Link id="restaurant-header-logo" to='/'>
                     <span>LOGO</span>
             </Link>
             <SearchBar/>
-            <Link id="restaurant-header-log-in" to={`${props.location.pathname}/login`}>
-                <span id="svg-container"><FaRegUserCircle/></span>
-                <span>LOG IN</span>
-            </Link>
+            {
+                user.isLogIn ?
+                <div id="restaurant-header-log-in">
+                    <span id="svg-container"><FaRegUserCircle/></span>
+                    <span>{ user.username }</span>
+                </div> :
+                <Link id="restaurant-header-log-in" to={`${props.location.pathname}/login`}>
+                    <span id="svg-container"><FaRegUserCircle/></span>
+                    <span>LOG IN</span>
+                </Link>
+            }
         </header>
     )
 }

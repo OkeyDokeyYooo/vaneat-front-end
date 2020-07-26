@@ -1,6 +1,10 @@
 import React from 'react'
 import { Link, Switch, Route, } from 'react-router-dom'
 
+// redux
+import { useSelector } from 'react-redux'
+
+
 // icons
 import {FaRegUserCircle} from 'react-icons/fa'
 
@@ -13,16 +17,26 @@ import './HomePage.css'
 
 const HomePage = (props) => {
 
+    const user = useSelector(state => state.user)
+
     return (
         <div className="home-page">
             <header >
                 <Link id="home-page-header-logo" to="/">
                     <span>LOGO</span>
                 </Link>
-                <Link id="home-page-header-log-in" to="/login">
-                    <span id="svg-container"><FaRegUserCircle/></span>
-                    <span>LOG IN</span>
-                </Link>    
+                {
+                    user.isLogIn ? 
+                    <div id="home-page-header-log-in">
+                        <span id="svg-container"><FaRegUserCircle/></span>
+                        <span>{user.username}</span>
+                    </div> :
+                    <Link id="home-page-header-log-in" to="/login">
+                        <span id="svg-container"><FaRegUserCircle/></span>
+                        <span>LOG IN</span>
+                    </Link> 
+                }
+   
             </header>
             <main>
                 <div id="home-body">
@@ -39,4 +53,4 @@ const HomePage = (props) => {
     )
 }
 
-export default HomePage;
+export default HomePage

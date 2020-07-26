@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 import React, {useState}from 'react'
 import OutsideClickHandler from 'react-outside-click-handler';
 import {useHistory, Link, withRouter} from 'react-router-dom'
