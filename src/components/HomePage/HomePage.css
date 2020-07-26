@@ -19,8 +19,9 @@ button:focus {
 }
 
 header {
-    padding: 1.5rem;
-    /* background: lightcoral; */
+    padding: 1em;   
+    z-index: 900;
+    line-height: 40px;
 }
 
 #home-page-header-logo span{
