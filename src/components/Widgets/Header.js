@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link, withRouter} from 'react-router-dom'
+import {Link, useRouteMatch} from 'react-router-dom'
 import {TextField, makeStyles} from '@material-ui/core'
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
@@ -42,8 +42,7 @@ const useStyles = makeStyles((theme) => ({
 
 const SearchBar = () => {
 
-    const classes = useStyles();
-
+    const classes = useStyles()
     // when use click enter, then start search weather we have the restaurant
     const handleChange  = (event) => {
         console.log(event.target.value)
@@ -76,6 +75,7 @@ const SearchBar = () => {
 const Header = (props) => {
 
     const user = useSelector(state => state.user)
+    const match = useRouteMatch()
 
     console.log(user.isLogIn)
 
@@ -91,7 +91,7 @@ const Header = (props) => {
                     <span id="svg-container"><FaRegUserCircle/></span>
                     <span>{ user.username }</span>
                 </div> :
-                <Link id="restaurant-header-log-in" to={`${props.location.pathname}/login`}>
+                <Link id="restaurant-header-log-in" to={`${match.path}/login`}>
                     <span id="svg-container"><FaRegUserCircle/></span>
                     <span>LOG IN</span>
                 </Link>
@@ -100,4 +100,4 @@ const Header = (props) => {
     )
 }
 
-export default withRouter(Header)
+export default Header
