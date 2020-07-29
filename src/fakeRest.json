@@ -7,7 +7,37 @@
         "dollar": 3,
         "rate": "4.83",
         "type": "Hot Pot",
-        "image": "https://www.vmcdn.ca/f/files/via/images/haidilao-us.jpg;w=960"
+        "image": "https://www.vmcdn.ca/f/files/via/images/haidilao-us.jpg;w=960",
+        "banner": "https://png.pngtree.com/thumb_back/fw800/back_our/20190621/ourmid/pngtree-winter-spicy-hot-pot-texture-black-banner-image_181035.jpg",
+        "reviews": [
+            {
+                "author": "Amber T.",
+                "rate": 5,
+                "date": "4/26/2020",
+                "review": "I haven't dined in here in person due to quarantine restrictions, but I do order take outs from here in recent times. I must say the level of care they take in packaging the food, and the complimentary fresh fruits with a message card for even small orders show how eager they are to please - a great trait in any restaurant business! The combo sets I ordered tasted pretty good, the ingredients seemed fresh. I've had really good experience with this chain restaurant in China while travelling, they've always been known to provide amazing service. I recall them gifting me with a stuffed toy with special in person New Years greetings on a visit to their branch in northern China once, it's not this store in Richmond but my memory of the brand gives me high hopes for the level of service I will enjoy if I do dine in the Richmond location one day."
+            },
+            {
+                "author": "Anne P.",
+                "rate": 5,
+                "date": "6/14/2020",
+                "review": "This is the first time we've tried this place and what an experience -- they have the best customer service! Everyone in the staff was friendly, very helpful and just pleasant. Because of COVID, they have some measures in place for the safety of customers and staff. The restaurant is really spacious so physical distancing is possible. The food was great. There were so many choices. The sauce bar is closed but you can still order whatever sauce you like. We ordered the pork bone soup and mushroom soup, beef brisket, pork hork, seafood platter, assorted vegetables, crispy pork and rice. Everything was fresh! Serving size is just right. The soup base were delicious. It's probably a little expensive but definitely worth it!! Truly a great experience dining in for the first time after 3 months of quarantine! Thanks so much to all the staff for being so nice!"
+            },
+            {
+                "author": "Rency L.",
+                "rate": 5,
+                "date": "6/30/2020",
+                "review": "HaiDiLao is known for their hotpot, but even more for their amazing service. I dined in on a rainy day and a worker immediately came to me with a plastic bag to hold my umbrella (they truly treat you like the most important person in the world). The worker ushered me to take a seat in the waiting area and offered me infused lemon water and popcorn (very bougie). When I was seated in the restaurant, a worker handed me an apron, a hair tie, and phone screen wipes. They even have a drawer underneath the seats where you can put your jackets and bags. Their service is incredible. Every time I reach for the drawer to get more chopsticks or pour more water into my cup, a worker always comes rushing down."
+            }
+        ],
+        "hours":{
+            "Mon": "10:30 am - 8:00 pm",
+            "Tue": "10:30 am - 8:00 pm",
+            "Wed": "10:30 am - 8:00 pm",
+            "Thu": "10:30 am - 8:00 pm",
+            "Fir": "10:30 am - 8:00 pm",
+            "Sat": "10:30 am - 8:00 pm",
+            "Sun": "11:30 am - 8:00 pm"
+        }
     },
     {
         "name": "Liuyishou Hotpot(Richmond)",
@@ -17,7 +47,31 @@
         "dollar": 4,
         "rate": "4.51",
         "type": "Hot Pot",
-        "image": "https://cdn.vox-cdn.com/thumbor/IyZZmCOkCkbs1mqjRW8srbZZFzg=/0x0:1000x750/1200x800/filters:focal(420x295:580x455)/cdn.vox-cdn.com/uploads/chorus_image/image/62674907/MEAT.0.jpg"
+        "image": "https://cdn.vox-cdn.com/thumbor/IyZZmCOkCkbs1mqjRW8srbZZFzg=/0x0:1000x750/1200x800/filters:focal(420x295:580x455)/cdn.vox-cdn.com/uploads/chorus_image/image/62674907/MEAT.0.jpg",
+        "banner": "https://png.pngtree.com/thumb_back/fw800/back_our/20190621/ourmid/pngtree-hot-pot-black-vector-catering-poster-banner-image_184437.jpg",
+        "reviews": [
+            {
+                "author": "Michelle H.",
+                "rate": 5,
+                "date": "12/11/2019",
+                "review": "From the food to the service and hospitality...I have no complaints AT ALL. The quality of the dishes were superb and the presentation was perfect! Every was top quality. My favourite was the scallop--cooked perfectly for 2mins and it just melts in your mouth...so so tender. I also loved the huge variety of sauces they offer at their sauce station!"
+            },
+            {
+                "author": "Amy C.",
+                "rate": 3,
+                "date": "7/9/2020",
+                "review": "So...I was kinda pissed with the restaurant. We made a reservation for 7PM, and when we arrived, we were told we would have to wait another half an hour plus there were 2 other parties waiting ahead of us."
+            }
+        ],
+        "hours": {
+                "Mon": "10:30 am - 8:00 pm",
+                "Tue": "10:30 am - 8:00 pm",
+                "Wed": "10:30 am - 8:00 pm",
+                "Thu": "10:30 am - 8:00 pm",
+                "Fir": "10:30 am - 8:00 pm",
+                "Sat": "10:30 am - 8:00 pm",
+                "Sun": "11:30 am - 8:00 pm"
+            }
     },
 
     {
@@ -28,7 +82,25 @@
         "dollar": 5,
         "numOfRate": 40,
         "type": "Sushi",
-        "image": "https://i.pinimg.com/originals/f0/64/4e/f0644eef6f2fce0e19ee5d8a035cb5e7.jpg"
+        "image": "https://i.pinimg.com/originals/f0/64/4e/f0644eef6f2fce0e19ee5d8a035cb5e7.jpg",
+        "banner": "https://png.pngtree.com/thumb_back/fw800/back_our/20190620/ourmid/pngtree-sushi-cartoon-black-banner-image_170617.jpg",
+        "reviews": [
+            {
+                "author": "Catherine X.",
+                "rate": 5,
+                "date": "7/18/2020",
+                "review": "Honestly I'm not the biggest fan of Sushi in general but Miku blew me away with its service and high-quality tasting sushi." 
+            }
+        ],
+        "hours":{
+                "Mon": "10:30 am - 8:00 pm",
+                "Tue": "10:30 am - 8:00 pm",
+                "Wed": "10:30 am - 8:00 pm",
+                "Thu": "10:30 am - 8:00 pm",
+                "Fir": "10:30 am - 8:00 pm",
+                "Sat": "10:30 am - 8:00 pm",
+                "Sun": "11:30 am - 8:00 pm"
+        }
     },
     {
         "name": "Togo Sushi (SFU)",
@@ -38,6 +110,24 @@
         "dollar": 2,
         "numOfRate": 103,
         "type": "Sushi",
-        "image": "https://s3-media0.fl.yelpcdn.com/bphoto/boePQG7FjIykq9LXbwRL_w/l.jpg"
+        "image": "https://s3-media0.fl.yelpcdn.com/bphoto/boePQG7FjIykq9LXbwRL_w/l.jpg",
+        "banner": "https://png.pngtree.com/thumb_back/fw800/back_our/20190620/ourmid/pngtree-sushi-minimalist-brown-poster-background-banner-image_159837.jpg",
+        "reviews": [
+            {
+                "author": "Pam C.",
+                "rate": 3,
+                "date": "10/7/2018",
+                "review": "Customer service has been above average everytime I visit Togo in this location. However, their sushi rolls are smaller and quality is slightly less than average. I also noticed that this location is pricier than the Oakridge location. Sometimes, I get hungry I want sushi but this is the only sushi place in the area. :("
+            }
+        ],
+        "hours":{
+            "Mon": "10:30 am - 8:00 pm",
+            "Tue": "10:30 am - 8:00 pm",
+            "Wed": "10:30 am - 8:00 pm",
+            "Thu": "10:30 am - 8:00 pm",
+            "Fir": "10:30 am - 8:00 pm",
+            "Sat": "10:30 am - 8:00 pm",
+            "Sun": "11:30 am - 8:00 pm"
+        }
     }
 ]
