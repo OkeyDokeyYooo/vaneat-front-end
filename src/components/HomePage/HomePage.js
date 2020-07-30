@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link, Switch, Route, } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 // redux
 import { useSelector } from 'react-redux'
@@ -18,6 +18,8 @@ import './HomePage.css'
 const HomePage = (props) => {
 
     const user = useSelector(state => state.user)
+    const [showLogin, setShowLogin] = useState(false)
+    const [showSignup, setShowSignup] = useState(false)
 
     return (
         <div className="home-page">
@@ -31,12 +33,11 @@ const HomePage = (props) => {
                         <span id="svg-container"><FaRegUserCircle/></span>
                         <span>{user.username}</span>
                     </div> :
-                    <Link id="home-page-header-log-in" to="/login">
+                    <div id="home-page-header-log-in" onClick={() => setShowLogin(true)}>
                         <span id="svg-container"><FaRegUserCircle/></span>
                         <span>LOG IN</span>
-                    </Link> 
+                    </div> 
                 }
-   
             </header>
             <main>
                 <div id="home-body">
@@ -44,11 +45,15 @@ const HomePage = (props) => {
                     <Link to="/restaurants"><button>LET'S GO EXPLORE</button></Link>
                 </div>
             </main>
+            {
+                showLogin &&
+                <LoginWindow setShowLogin={setShowLogin} setShowSignup={setShowSignup}/>
+            }
+            {
+                showSignup &&
+                <SignupWindow setShowLogin={setShowLogin} setShowSignup={setShowSignup} />
+            }
             {/* <footer>Footer</footer> */}
-            <Switch>
-                <Route exact path='/login' component={LoginWindow}/>
-                <Route exact path='/signup' component={SignupWindow}/>
-            </Switch>
         </div>
     )
 }

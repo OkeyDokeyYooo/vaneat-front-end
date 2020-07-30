@@ -21,6 +21,7 @@ const RestItems = () => {
                                     name: cats.name
                                 }
                             }}
+                            key={index}
                         >
                             <RestList 
                                 img={cats.image}

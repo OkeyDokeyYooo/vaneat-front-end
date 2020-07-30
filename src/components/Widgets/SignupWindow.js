@@ -1,8 +1,6 @@
 /* eslint-disable no-useless-escape */
 import React, {useState}from 'react'
 import OutsideClickHandler from 'react-outside-click-handler';
-import {useHistory, Link, withRouter} from 'react-router-dom'
-
 
 // material ui
 import {TextField, InputAdornment, IconButton, FormControl, InputLabel, FilledInput, FormHelperText} from '@material-ui/core';
@@ -113,11 +111,11 @@ const SignupForm = () => {
         event.preventDefault()
         const isValid = validateInput()
         if (isValid) {
+            // here submit user signup form to backend
             console.log(values)
             setValues(signUpInitState)
         }
     }
-
 
     return (
         <form className={classes.root} onSubmit={handleSignUp}>
@@ -189,25 +187,21 @@ const SignupForm = () => {
 
 const SignupWindow = (props) => {
 
-    const history = useHistory()
-
-    const pathname = props.location.pathname.replace("/signup", "")
-
     return (
         <div className="pop-up-window-background">
             <OutsideClickHandler 
-                onOutsideClick={() => history.push(pathname)}
+                onOutsideClick={() => props.setShowSignup(false)}
             >
                 <div id="pop-up-window">
                     <div id="pop-up-window-header">
-                        <BsX style={{float: 'left', color: "rgba(0, 0, 0, 0.54)", fontSize: "1.5em"}} onClick={() => history.push(pathname)}/>
+                        <BsX style={{float: 'left', color: "rgba(0, 0, 0, 0.54)", fontSize: "1.5em"}} onClick={() => props.setShowSignup(false)}/>
                         Sign Up For An Account
                     </div>
                     <div id="pop-up-window-body">
                         <SignupForm />
                     </div>
                     <div id="pop-up-window-bottom">
-                        <p>Already Have An Account? <Link to={`${pathname}/login`}>Log In</Link></p>
+                        <p>Already Have An Account? <span onClick={() => {props.setShowSignup(false); props.setShowLogin(true)}}>Log In</span></p>
                     </div>
                 </div>
             </OutsideClickHandler>
@@ -215,4 +209,4 @@ const SignupWindow = (props) => {
     )
 }
 
-export default withRouter(SignupWindow)
+export default SignupWindow

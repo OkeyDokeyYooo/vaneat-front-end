@@ -1,5 +1,6 @@
 import React, {useEffect, useState, useCallback, memo} from 'react'
 import Rating from '@material-ui/lab/Rating';
+import { useLocation } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles';
 import moment from 'moment';
 // import { GoogleMap, LoadScript } from '@react-google-maps/api';
@@ -22,8 +23,9 @@ import fakeRest from '../../fakeRest.json'
 
 
 const DetailRestaurantPage = (props) => {
-
-    const { name } = props.location.state
+    const location = useLocation()
+    const name = location.state.name
+    console.log(name)
     const [restInfo, setRestInfo] = useState(null)
     const [rateColor, setRateColor] = useState(null)
     // const [map, setMap] = useState(null)

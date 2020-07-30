@@ -3,7 +3,6 @@ import React, {useState} from 'react'
 import { GoogleLogin } from 'react-google-login'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import OutsideClickHandler from 'react-outside-click-handler';
-import { useHistory, Link, withRouter } from 'react-router-dom'
 
 // redux
 import { useDispatch } from 'react-redux'
@@ -134,19 +133,18 @@ const LoginForm = () => {
 const LoginWindow = (props) => {
 
     const [showLoginForm, setShowLoginForm] = useState(false)
-    const history = useHistory()
 
     // redux
     const dispatch = useDispatch()
 
     const handleGoogleLogin = (res) => {
         dispatch(googleLogin(res.profileObj))
-        history.goBack()
+        props.setShowLogin(false)
     }
 
     const handleFacebookLogin = (res) => {
         dispatch(facebookLogin(res))
-        history.goBack()
+        props.setShowLogin(false)
     }
 
     const LoginButton = (props) => {
@@ -158,16 +156,14 @@ const LoginWindow = (props) => {
         )
     }
 
-    const pathname = props.location.pathname.replace("/login", "")
-
     return (
         <div className="pop-up-window-background">
             <OutsideClickHandler
-                onOutsideClick={() => history.push(pathname)}
+                onOutsideClick={() => props.setShowLogin(false)}
             >
                 <div id="pop-up-window">
                     <div id="pop-up-window-header">
-                        <BsX style={{float: 'left', color: "rgba(0, 0, 0, 0.54)", fontSize: "1.5em"}} onClick={() => history.push(pathname)}/>
+                        <BsX style={{float: 'left', color: "rgba(0, 0, 0, 0.54)", fontSize: "1.5em"}} onClick={() => props.setShowLogin(false)}/>
                         Log In To Trip Advisor
                     </div>
                     <div id="pop-up-window-body">
@@ -212,7 +208,7 @@ const LoginWindow = (props) => {
                         </section>
                     </div>
                     <div id="pop-up-window-bottom">
-                        <p>Need an account? <Link to={`${pathname}/signup`}>Sign up</Link></p>
+                        <p>Need an account? <span onClick={() => {props.setShowLogin(false); props.setShowSignup(true)}}>Sign up</span></p>
                     </div>
                 </div>
             </OutsideClickHandler>
@@ -220,4 +216,4 @@ const LoginWindow = (props) => {
     )
 }
 
-export default withRouter(LoginWindow)
+export default LoginWindow

@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useState }from 'react'
 import {Link, useRouteMatch} from 'react-router-dom'
 import {TextField, makeStyles} from '@material-ui/core'
 import Autocomplete from '@material-ui/lab/Autocomplete';
+
+// component
+import LoginWindow from '../Widgets/LoginWindow'
+import SignupWindow from '../Widgets/SignupWindow'
 
 // redux
 import { useSelector } from 'react-redux'
@@ -76,27 +80,38 @@ const Header = (props) => {
 
     const user = useSelector(state => state.user)
     const match = useRouteMatch()
+    const [showLogin, setShowLogin] = useState(false)
+    const [showSignup, setShowSignup] = useState(false)
 
-    console.log(user.isLogIn)
 
     return (
-        <header id="restaurant-header">
-            <Link id="restaurant-header-logo" to='/'>
-                    <span>LOGO</span>
-            </Link>
-            <SearchBar/>
-            {
-                user.isLogIn ?
-                <div id="restaurant-header-log-in">
-                    <span id="svg-container"><FaRegUserCircle/></span>
-                    <span>{ user.username }</span>
-                </div> :
-                <Link id="restaurant-header-log-in" to={`${match.path}/login`}>
-                    <span id="svg-container"><FaRegUserCircle/></span>
-                    <span>LOG IN</span>
+        <React.Fragment>
+            <header id="restaurant-header">
+                <Link id="restaurant-header-logo" to='/'>
+                        <span>LOGO</span>
                 </Link>
+                <SearchBar/>
+                {
+                    user.isLogIn ?
+                    <div id="restaurant-header-log-in">
+                        <span id="svg-container"><FaRegUserCircle/></span>
+                        <span>{ user.username }</span>
+                    </div> :
+                    <div id="restaurant-header-log-in" onClick={() => setShowLogin(true)}>
+                        <span id="svg-container"><FaRegUserCircle/></span>
+                        <span>LOG IN</span>
+                    </div>
+                }
+            </header>
+            {
+                showLogin &&
+                <LoginWindow setShowLogin={setShowLogin} setShowSignup={setShowSignup}/>
             }
-        </header>
+            {
+                showSignup &&
+                <SignupWindow setShowLogin={setShowLogin} setShowSignup={setShowSignup} />
+            }
+        </React.Fragment>
     )
 }
 

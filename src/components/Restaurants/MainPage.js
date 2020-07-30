@@ -31,11 +31,9 @@ const MainPage = () => {
     return (
         <div id="restaurant-main-page">
             <Header />
-            <Route path={`${match.path}/:restaurantName`} component={DetailRestaurant}/>
-            <Route exact path={`${match.path}`} component={RestaurantMainPage}/>
             <Switch>
-                <Route path='/restaurants/login' component={LoginWindow}/>
-                <Route path='/restaurants/signup' component={SignupWindow}/>
+                <Route path={`${match.path}/:restaurantName`} component={DetailRestaurant}/>
+                <Route exact path={`${match.path}`} component={RestaurantMainPage}/>
             </Switch>
         </div>
     )
