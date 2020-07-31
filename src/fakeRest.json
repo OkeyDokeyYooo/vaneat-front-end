@@ -83,14 +83,33 @@
             }
         ],
         "hours": {
-                "Mon": "10:30 am - 8:00 pm",
-                "Tue": "10:30 am - 8:00 pm",
-                "Wed": "10:30 am - 8:00 pm",
-                "Thu": "10:30 am - 8:00 pm",
-                "Fir": "10:30 am - 8:00 pm",
-                "Sat": "10:30 am - 8:00 pm",
-                "Sun": "11:30 am - 8:00 pm"
+            "Mon": "10:30 am - 8:00 pm",
+            "Tue": "10:30 am - 8:00 pm",
+            "Wed": "10:30 am - 8:00 pm",
+            "Thu": "10:30 am - 8:00 pm",
+            "Fir": "10:30 am - 8:00 pm",
+            "Sat": "10:30 am - 8:00 pm",
+            "Sun": "11:30 am - 8:00 pm"
+        },
+        "dishes":[
+            {
+                "tittle":"Beef",
+                "img": "https://robert-parker-michelin-hk-prod.s3.amazonaws.com/media/image/2017/10/30/7630583fa9cc4b41a69328ffe2fd3843_%E7%89%9B%E8%82%89.jpg"
+            },
+            {
+                "tittle":"Lamb",
+                "img": "https://media-cdn.tripadvisor.com/media/photo-s/06/84/f1/89/haidilao-hotpot-hedong.jpg"
+            },
+            {
+                "tittle":"Pork",
+                "img": "https://media-cdn.tripadvisor.com/media/photo-s/05/2b/a8/31/hai-di-lao.jpg"
+            },
+            {
+                "tittle":"Potato",
+                "img": "https://www.haidilao.com/eportal/imageDir/cn_chinese/2019/07/2019072117113277545.jpg"
             }
+            
+        ]
     },
 
     {
@@ -119,7 +138,26 @@
                 "Fir": "10:30 am - 8:00 pm",
                 "Sat": "10:30 am - 8:00 pm",
                 "Sun": "11:30 am - 8:00 pm"
-        }
+        },
+        "dishes":[
+            {
+                "tittle":"Beef",
+                "img": "https://robert-parker-michelin-hk-prod.s3.amazonaws.com/media/image/2017/10/30/7630583fa9cc4b41a69328ffe2fd3843_%E7%89%9B%E8%82%89.jpg"
+            },
+            {
+                "tittle":"Lamb",
+                "img": "https://media-cdn.tripadvisor.com/media/photo-s/06/84/f1/89/haidilao-hotpot-hedong.jpg"
+            },
+            {
+                "tittle":"Pork",
+                "img": "https://media-cdn.tripadvisor.com/media/photo-s/05/2b/a8/31/hai-di-lao.jpg"
+            },
+            {
+                "tittle":"Potato",
+                "img": "https://www.haidilao.com/eportal/imageDir/cn_chinese/2019/07/2019072117113277545.jpg"
+            }
+            
+        ]
     },
     {
         "name": "Togo Sushi (SFU)",
@@ -147,6 +185,25 @@
             "Fir": "10:30 am - 8:00 pm",
             "Sat": "10:30 am - 8:00 pm",
             "Sun": "11:30 am - 8:00 pm"
+        },
+        "dishes":[
+        {
+            "tittle":"Beef",
+            "img": "https://robert-parker-michelin-hk-prod.s3.amazonaws.com/media/image/2017/10/30/7630583fa9cc4b41a69328ffe2fd3843_%E7%89%9B%E8%82%89.jpg"
+        },
+        {
+            "tittle":"Lamb",
+            "img": "https://media-cdn.tripadvisor.com/media/photo-s/06/84/f1/89/haidilao-hotpot-hedong.jpg"
+        },
+        {
+            "tittle":"Pork",
+            "img": "https://media-cdn.tripadvisor.com/media/photo-s/05/2b/a8/31/hai-di-lao.jpg"
+        },
+        {
+            "tittle":"Potato",
+            "img": "https://www.haidilao.com/eportal/imageDir/cn_chinese/2019/07/2019072117113277545.jpg"
         }
+            
+        ]
     }
 ]

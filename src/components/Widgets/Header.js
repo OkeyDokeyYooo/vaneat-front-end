@@ -1,5 +1,5 @@
 import React, { useState }from 'react'
-import {Link, useRouteMatch} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import {TextField, makeStyles} from '@material-ui/core'
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
@@ -79,7 +79,6 @@ const SearchBar = () => {
 const Header = (props) => {
 
     const user = useSelector(state => state.user)
-    const match = useRouteMatch()
     const [showLogin, setShowLogin] = useState(false)
     const [showSignup, setShowSignup] = useState(false)
 
@@ -93,10 +92,10 @@ const Header = (props) => {
                 <SearchBar/>
                 {
                     user.isLogIn ?
-                    <div id="restaurant-header-log-in">
+                    <Link id="restaurant-header-log-in" to="/profile" >
                         <span id="svg-container"><FaRegUserCircle/></span>
                         <span>{ user.username }</span>
-                    </div> :
+                    </Link> :
                     <div id="restaurant-header-log-in" onClick={() => setShowLogin(true)}>
                         <span id="svg-container"><FaRegUserCircle/></span>
                         <span>LOG IN</span>

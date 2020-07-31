@@ -4,8 +4,6 @@ import {Switch, Route, useRouteMatch} from 'react-router-dom';
 // component
 import Slider from '../Widgets/Sliders'
 import Header from '../Widgets/Header'
-import LoginWindow from "../Widgets/LoginWindow"
-import SignupWindow from "../Widgets/SignupWindow"
 import RestList from '../Widgets/RestList'
 import DetailRestaurant from './DetailRestaurantPage'
 

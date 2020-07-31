@@ -1,13 +1,14 @@
-import React, {Component} from 'react';
+import React, {Component} from 'react'
 import {
   Switch,
   Route
-} from "react-router-dom";
+} from "react-router-dom"
 
 
 // components
-import HomePage from './components/HomePage/HomePage';
-import MainPage from './components/Restaurants/MainPage';
+import HomePage from './components/HomePage/HomePage'
+import MainPage from './components/Restaurants/MainPage'
+import ProfilePage from './components/Profile'
 class App extends Component {
 
   componentDidMount() {
@@ -20,6 +21,8 @@ class App extends Component {
       <Switch>
         <Route path="/restaurants" component={MainPage} />
 
+        <Route path="/profile" component={ProfilePage} />
+
         <Route path="/" component={HomePage} />
 
       </Switch>
@@ -28,4 +31,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default App

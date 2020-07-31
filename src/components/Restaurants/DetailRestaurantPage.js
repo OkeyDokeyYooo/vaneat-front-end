@@ -8,6 +8,8 @@ import moment from 'moment';
 // components
 import ReviewItem from '../Widgets/ReviewItem'
 import DishesSlider from '../Widgets/DishesSlider'
+import ReviewWindow from '../Widgets/ReviewWindow'
+
 
 // need to get the detail information from backend 
 import fakeRest from '../../fakeRest.json'
@@ -26,9 +28,12 @@ import fakeRest from '../../fakeRest.json'
 const DetailRestaurantPage = (props) => {
     const location = useLocation()
     const name = location.state.name
-    console.log(name)
+
     const [restInfo, setRestInfo] = useState(null)
     const [rateColor, setRateColor] = useState(null)
+    const [showPopUp, setShowPopUp] = useState(true)
+
+
     // const [map, setMap] = useState(null)
 
     // const onLoad = useCallback(function callback(map) {
@@ -65,6 +70,12 @@ const DetailRestaurantPage = (props) => {
             setRateColor("ok")
         }
     }, [])
+
+    // make background not scrolling
+    useEffect(() => {
+        showPopUp && (document.body.style.overflow = 'hidden')
+        !showPopUp && (document.body.style.overflow = 'unset')
+     }, [showPopUp ]);
 
     return (
         <div className="detail-restaurant-page-wrapper">
@@ -148,6 +159,10 @@ const DetailRestaurantPage = (props) => {
                         </section>
                     </div>
                 </React.Fragment>
+            }
+            {
+                showPopUp && restInfo &&
+                <ReviewWindow dishes={restInfo.dishes} setShowPopUp={setShowPopUp}/>
             }
         </div>
     )
