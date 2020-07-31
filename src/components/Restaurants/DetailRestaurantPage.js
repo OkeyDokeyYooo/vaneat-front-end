@@ -31,7 +31,7 @@ const DetailRestaurantPage = (props) => {
 
     const [restInfo, setRestInfo] = useState(null)
     const [rateColor, setRateColor] = useState(null)
-    const [showPopUp, setShowPopUp] = useState(true)
+    const [showPopUp, setShowPopUp] = useState(false)
 
 
     // const [map, setMap] = useState(null)
@@ -98,6 +98,9 @@ const DetailRestaurantPage = (props) => {
                                 <span className={`detail-restaurant-rate-txt ${rateColor}`}>{restInfo.rate}</span>
                                 <span id="detail-restaurant-num-rate">{restInfo.reviews.length} reviews</span>
                             </div>
+                            <div id="detail-page-btn-section">
+                                <button id="add-review-btn" onClick={() => setShowPopUp(true)}>Add Review</button>
+                            </div>
                         </section>
                         <hr/>
                         <section>
@@ -120,7 +123,6 @@ const DetailRestaurantPage = (props) => {
                                             }
                                         }
                                         return (
-
                                             <tr key={key}>
                                                 <th className="hours-table-col1">{key}</th>
                                                 <th className="hours-table-col2">{val}</th> 
@@ -143,7 +145,7 @@ const DetailRestaurantPage = (props) => {
                             {
                                 restInfo.reviews.map((review, index) => {
                                     return (
-                                        <React.Fragment>
+                                        <React.Fragment key={index}>
                                             <ReviewItem 
                                                 key={index} 
                                                 author={review.author}

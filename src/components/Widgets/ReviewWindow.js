@@ -136,14 +136,14 @@ const ReviewWindow = props => {
                         {
                             props.dishes.map(dish => {
                                 return (
-                                    <li>
+                                    <li key={dish.tittle}>
                                         <input 
                                             type="checkbox" 
                                             id={dish.tittle}
                                             value={dish.tittle}
                                             onChange={handleDishes}
                                         />
-                                        <label for={dish.tittle}> {dish.tittle} </label>
+                                        <label htmlFor={dish.tittle}> {dish.tittle} </label>
                                     </li>
                                 )   
                             })
