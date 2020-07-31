@@ -7,6 +7,7 @@ import moment from 'moment';
 
 // components
 import ReviewItem from '../Widgets/ReviewItem'
+import DishesSlider from '../Widgets/DishesSlider'
 
 // need to get the detail information from backend 
 import fakeRest from '../../fakeRest.json'
@@ -123,6 +124,7 @@ const DetailRestaurantPage = (props) => {
                         <hr />
                         <section className="detail-restaurant-page-dishes-section">
                             <h3>Popular Dishes</h3>
+                            <DishesSlider dishes= {restInfo.dishes}/>
                         </section>
                         <hr />
                         <section className="detail-restaurant-page-reviews-section">
