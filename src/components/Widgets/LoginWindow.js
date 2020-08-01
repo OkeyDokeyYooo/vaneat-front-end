@@ -86,7 +86,6 @@ const LoginForm = () => {
 
     const handleLogin = event => {
         event.preventDefault()
-        event.preventDefault()
         const isValid = validateInput()
         if (isValid) {
             console.log(values)

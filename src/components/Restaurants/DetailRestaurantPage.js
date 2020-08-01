@@ -77,7 +77,7 @@ const DetailRestaurantPage = (props) => {
                     show: false
                 }
             })
-        }, 2000)
+        }, 4000)
     }
 
     // when this component mount to the DOM = componentDidMount
@@ -211,7 +211,7 @@ const DetailRestaurantPage = (props) => {
             }
             {
                 showAlert.show &&
-                <AlertWindow icon={showAlert.icon} text={showAlert.text}/>
+                <AlertWindow icon={showAlert.icon} text={showAlert.text} showAlert={showAlert}/>
             }
         </div>
     )

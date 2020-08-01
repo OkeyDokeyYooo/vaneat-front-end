@@ -375,60 +375,20 @@
     background-color: #d2f8dc;
     color: rgb(75, 155, 66);
     z-index: 999;
-/* https://medium.com/cloud-native-the-gathering/how-to-use-css-to-fade-in-and-fade-out-html-text-and-pictures-f45c11364f08 */
-    animation: fadeIn ease 0.5s;
-    -webkit-animation: fadeIn ease 0.5s;
-    -moz-animation: fadeIn ease 0.5s;
-    -o-animation: fadeIn ease 0.5s;
-    -ms-animation: fadeIn ease 0.5s;
-
+/* https://stackoverflow.com/questions/30125705/css-how-to-make-an-element-fade-in-and-then-fade-out/30125780 */
+    -webkit-animation: fadeinout 4s linear forwards;
+    animation: fadeinout 4s linear forwards;
 }
 
-@keyframes fadeIn {
-    0% {
-      opacity:0;
-    }
-    100% {
-      opacity:1;
-    }
+@-webkit-keyframes fadeinout {
+    0%,100% { opacity: 0;}
+    10%,90%{ opacity: 1; }
 }
   
-@-moz-keyframes fadeIn {
-    0% {
-      opacity:0;
-    }
-    100% {
-      opacity:1;
-    }
+@keyframes fadeinout {
+    0%,100% { opacity: 0; }
+    10%,90%{ opacity: 1; }
 }
-  
-@-webkit-keyframes fadeIn {
-    0% {
-      opacity:0;
-    }
-    100% {
-      opacity:1;
-    }
-}
-  
-@-o-keyframes fadeIn {
-    0% {
-      opacity:0;
-    }
-    100% {
-      opacity:1;
-    }
-}
-  
-@-ms-keyframes fadeIn {
-    0% {
-      opacity:0;
-    }
-    100% {
-      opacity:1;
-    }
-}
-
 
 .alert-window-wrapper svg {
     display: inline-block;

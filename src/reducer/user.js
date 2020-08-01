@@ -11,10 +11,12 @@ const userReducer = (state = user, action) => {
 
     switch(action.type) {
         case 'GOOGLE_LOGIN':
+            console.log()
             return {
                 isLogIn: true,
                 username: user.name,
-                id: user.googleId
+                id: user.googleId,
+                avatar: user.imageUrl
             }
         case 'FACEBOOK_LOGIN':
             return {

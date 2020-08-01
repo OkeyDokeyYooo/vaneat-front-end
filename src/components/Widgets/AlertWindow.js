@@ -7,7 +7,7 @@ import './Widgets.css'
 
 const AlertWindow = props => {
     return (
-        <div className="alert-window-wrapper">
+        <div className='alert-window-wrapper' >
             {props.icon}
             {props.text}
         </div>
