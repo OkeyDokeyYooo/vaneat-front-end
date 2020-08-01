@@ -93,3 +93,33 @@
     margin-top: 1em;
 }
 
+/* button style */
+#detail-page-btn-section button {
+    vertical-align: top;
+    font-size: 1em;
+}
+
+#detail-page-btn-section svg {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+#detail-page-btn-section button:not(:first-child) {
+    margin-left: 1em;
+    color: #ED5A6B;
+    background-color: transparent;
+    border: 1px solid rgb(156, 156, 156);
+    padding: .5em 1em;
+    font-weight: 300;
+    border-radius: 4px;
+}
+
+#detail-page-btn-section button:not(:first-child) span {
+    color: black;
+}
+
+#detail-page-btn-section button:not(:first-child):hover {
+    background-color: #E8E8E8;
+    cursor: pointer;
+}

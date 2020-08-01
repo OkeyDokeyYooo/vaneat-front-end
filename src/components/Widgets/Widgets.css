@@ -345,7 +345,7 @@
 
 #add-review-btn {
     background: #ED5A6B;
-    border: none;
+    border: 1px solid #ED5A6B;
     font-size: 1em;
     color: #fff;
     padding: .5em 1em;
@@ -353,6 +353,32 @@
     font-weight: 300;
 }
 
-#add-review-btn:focus:hover{
+#add-review-btn:hover{
     background-color: #EA120E;
+    cursor: pointer;
+}
+
+/* Alert Window */
+
+.alert-window-wrapper {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    width: 20em;
+    font-size: 1em;
+    font-weight: 300;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 4px;
+    transform: translate(-50%, 0);
+    background-color: #d2f8dc;
+    color: rgb(75, 155, 66);
+    z-index: 999;
+}
+
+.alert-window-wrapper svg {
+    display: inline-block;
+    vertical-align: middle;
+    padding-bottom: 3px;
+    margin-right: 10px;
 }

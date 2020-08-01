@@ -1,6 +1,5 @@
 import React, {useEffect, useState, useCallback, memo} from 'react'
 import Rating from '@material-ui/lab/Rating';
-import { useLocation } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles';
 import moment from 'moment';
 // import { GoogleMap, LoadScript } from '@react-google-maps/api';
@@ -9,7 +8,13 @@ import moment from 'moment';
 import ReviewItem from '../Widgets/ReviewItem'
 import DishesSlider from '../Widgets/DishesSlider'
 import ReviewWindow from '../Widgets/ReviewWindow'
+import AlertWindow from '../Widgets/AlertWindow'
 
+// icon
+import { MdRateReview, MdDirections } from 'react-icons/md'
+import { BsBookmarkPlus } from 'react-icons/bs'
+import { FaShare } from 'react-icons/fa'
+import { MdContentCopy } from 'react-icons/all'
 
 // need to get the detail information from backend 
 import fakeRest from '../../fakeRest.json'
@@ -26,13 +31,16 @@ import fakeRest from '../../fakeRest.json'
 
 
 const DetailRestaurantPage = (props) => {
-    const location = useLocation()
-    const name = location.state.name
+    const name = props.match.params.restaurantName
 
     const [restInfo, setRestInfo] = useState(null)
     const [rateColor, setRateColor] = useState(null)
     const [showPopUp, setShowPopUp] = useState(false)
-
+    const [showAlert, setShowAlert] = useState({
+        show: false,
+        text: "Restaurant URL Copied to Clipboard",
+        icon: <MdContentCopy />
+    })
 
     // const [map, setMap] = useState(null)
 
@@ -56,6 +64,23 @@ const DetailRestaurantPage = (props) => {
         },
     })(Rating);
 
+    const alertWindowTimeOut = () => {
+        setShowAlert({
+            show: true,
+            text: "Restaurant URL Copied to Clipboard",
+            icon: <MdContentCopy />
+        });
+        setTimeout(() => {
+            setShowAlert(prevState => {
+                return {
+                    ...prevState,
+                    show: false
+                }
+            })
+        }, 2000)
+    }
+
+    // when this component mount to the DOM = componentDidMount
     useEffect(() => {
         let restData = fakeRest.find(rest => rest.name === name)
         setRestInfo(restData)
@@ -75,7 +100,8 @@ const DetailRestaurantPage = (props) => {
     useEffect(() => {
         showPopUp && (document.body.style.overflow = 'hidden')
         !showPopUp && (document.body.style.overflow = 'unset')
-     }, [showPopUp ]);
+    }, [showPopUp ]);
+
 
     return (
         <div className="detail-restaurant-page-wrapper">
@@ -99,7 +125,24 @@ const DetailRestaurantPage = (props) => {
                                 <span id="detail-restaurant-num-rate">{restInfo.reviews.length} reviews</span>
                             </div>
                             <div id="detail-page-btn-section">
-                                <button id="add-review-btn" onClick={() => setShowPopUp(true)}>Add Review</button>
+                                <button id="add-review-btn" onClick={() => setShowPopUp(true)}>
+                                    <MdRateReview />
+                                    <span>Add Review</span>
+                                </button>
+                                <button>
+                                    <a href={`http://maps.google.com/?q=${restInfo.location}`} target="_blank" el="noopener noreferrer">
+                                        <MdDirections />
+                                        <span>Direction</span>
+                                    </a>
+                                </button>
+                                <button>
+                                    <BsBookmarkPlus />
+                                    <span>Favorite</span>
+                                </button>
+                                <button onClick={() => {navigator.clipboard.writeText(window.location.href); alertWindowTimeOut()}}>
+                                    <FaShare />
+                                    <span>Share</span>
+                                </button>
                             </div>
                         </section>
                         <hr/>
@@ -165,6 +208,10 @@ const DetailRestaurantPage = (props) => {
             {
                 showPopUp && restInfo &&
                 <ReviewWindow dishes={restInfo.dishes} setShowPopUp={setShowPopUp}/>
+            }
+            {
+                showAlert.show &&
+                <AlertWindow icon={showAlert.icon} text={showAlert.text}/>
             }
         </div>
     )
