@@ -3,7 +3,7 @@ import {useSelector} from 'react-redux'
 
 // component
 import Header from '../Widgets/Header'
-import BookmarkSection from './BookmarkSection'
+import FavoriteSection from './FavoriteSection'
 import ReviewSection from './ReviewSection'
 
 import "./Profile.css"
@@ -48,7 +48,7 @@ const Profile = props => {
                                     20
                                 </div>
                                 <div className="profile-user-count-text">
-                                    Bookmarks
+                                    Favorite
                                 </div>
                             </div>
                         </div>
@@ -56,7 +56,7 @@ const Profile = props => {
                 </section>
                 {
                     section === "bookmarks" && 
-                    <BookmarkSection />
+                    <FavoriteSection />
                 } 
                 {
                     section === "reviews" &&

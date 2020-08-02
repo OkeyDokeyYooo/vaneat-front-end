@@ -137,6 +137,7 @@ const LoginWindow = (props) => {
     const dispatch = useDispatch()
 
     const handleGoogleLogin = (res) => {
+        console.log(res)
         dispatch(googleLogin(res.profileObj))
         props.setShowLogin(false)
     }

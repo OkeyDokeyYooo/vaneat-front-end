@@ -1,0 +1,26 @@
+[
+    {
+        "name": "HaiDiLao Hot Pot",
+        "image": "https://www.vmcdn.ca/f/files/via/images/haidilao-us.jpg;w=960",
+        "rate": "4.83",
+        "location": "8081 Westminster Hwy Unit 701, Richmond, BC V6X 1A7"
+    },
+    {
+        "name": "Liuyishou Hotpot(Richmond)",
+        "location": "150-4731 Garden city Rd, Richmond, BC",
+        "rate": "4.51",
+        "image": "https://cdn.vox-cdn.com/thumbor/IyZZmCOkCkbs1mqjRW8srbZZFzg=/0x0:1000x750/1200x800/filters:focal(420x295:580x455)/cdn.vox-cdn.com/uploads/chorus_image/image/62674907/MEAT.0.jpg"
+    },
+    {
+        "name": "HaiDiLao Hot Pot",
+        "image": "https://www.vmcdn.ca/f/files/via/images/haidilao-us.jpg;w=960",
+        "rate": "4.83",
+        "location": "8081 Westminster Hwy Unit 701, Richmond, BC V6X 1A7"
+    },
+    {
+        "name": "Liuyishou Hotpot(Richmond)",
+        "location": "150-4731 Garden city Rd, Richmond, BC",
+        "rate": "4.51",
+        "image": "https://cdn.vox-cdn.com/thumbor/IyZZmCOkCkbs1mqjRW8srbZZFzg=/0x0:1000x750/1200x800/filters:focal(420x295:580x455)/cdn.vox-cdn.com/uploads/chorus_image/image/62674907/MEAT.0.jpg"
+    }
+]
