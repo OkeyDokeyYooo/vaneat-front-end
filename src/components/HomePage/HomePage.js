@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import OutsideClickHandler from 'react-outside-click-handler';
 
 // redux
 import { useSelector } from 'react-redux'
 
 
 // icons
-import {FaRegUserCircle} from 'react-icons/fa'
+import {FaRegUserCircle, BsPeopleCircle, RiLogoutBoxRLine } from 'react-icons/all'
 
 // components
 import LoginWindow from '../Widgets/LoginWindow'
@@ -15,11 +16,33 @@ import SignupWindow from '../Widgets/SignupWindow'
 import './HomePage.css'
 
 
+const UserWindow = props => {
+    return (
+        <OutsideClickHandler onOutsideClick={() => props.setShowUserWindow(false)}>
+            <menu className="user-window-wrapper">
+                <Link to="/profile">
+                <div className="user-window-btn">
+                    <BsPeopleCircle />
+                    <span>About Me</span>
+                </div>
+                </Link>
+                <div className="user-window-btn">
+                    <RiLogoutBoxRLine />
+                    <span>Log Out</span>
+                </div>
+            </menu>
+        </OutsideClickHandler>
+    )
+}
+
+
 const HomePage = (props) => {
 
     const user = useSelector(state => state.user)
     const [showLogin, setShowLogin] = useState(false)
     const [showSignup, setShowSignup] = useState(false)
+    const [showUserWindow, setShowUserWindow] = useState(false)
+
 
     return (
         <div className="home-page">
@@ -29,7 +52,7 @@ const HomePage = (props) => {
                 </Link>
                 {
                     user.isLogIn ? 
-                    <div id="home-page-header-log-in">
+                    <div id="home-page-header-log-in" onClick={() => setShowUserWindow(true)}>
                         <span id="svg-container"><FaRegUserCircle/></span>
                         <span>{user.username}</span>
                     </div> :
@@ -37,6 +60,10 @@ const HomePage = (props) => {
                         <span id="svg-container"><FaRegUserCircle/></span>
                         <span>LOG IN</span>
                     </div> 
+                }
+                {
+                    showUserWindow && 
+                    <UserWindow setShowUserWindow={setShowUserWindow}/>
                 }
             </header>
             <main>

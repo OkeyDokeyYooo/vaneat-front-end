@@ -1,0 +1,18 @@
+.error-page-wrapper {
+    display: flex;
+}
+
+.error-page-wrapper img {
+    height: 75vh;
+    margin-left: 10%;
+}
+
+.error-page-text {
+    display: inline-block;
+    height: 75vh;
+}
+
+.error-page-text p {
+    margin-top: 50%;
+    font-size: 3em;
+}

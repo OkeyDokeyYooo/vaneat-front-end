@@ -173,7 +173,7 @@ const LoginWindow = (props) => {
                                 buttonText="Login"
                                 onSuccess={handleGoogleLogin}
                                 onFailure={handleGoogleLogin}
-                                isSignedIn={true}
+                                isSignedIn={false}
                                 cookiePolicy={'single_host_origin'}
                                 render={renderProps => (
                                     <LoginButton onClick={renderProps.onClick} title={"CONTINUE WITH GOOGLE"} icon={<FcGoogle />}/>

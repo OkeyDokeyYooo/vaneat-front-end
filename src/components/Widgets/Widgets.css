@@ -94,6 +94,45 @@
     color: #0d4696;
 }
 
+.user-window-wrapper {
+    width: 120px;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 0 18 rgba(0, 0, 0, 0.15);
+    border: 1px solid #eeeeef;
+    z-index: 999;
+    position: absolute;
+    right: 10px;
+    padding: 10px 15px 15px;
+    text-align: left;
+}
+
+.user-window-btn {
+    padding: 0 5px;
+    border-radius: 4px;
+}
+
+.user-window-btn:hover {
+    cursor: pointer;
+    background-color: #e8e8e8;
+}
+
+.user-window-btn span {
+    font-size: 14px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+    color: #2b273c;
+    font-weight: 600;
+    line-height: 20px;
+}
+
+.user-window-btn svg {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 1.5em;
+    color: #2b273c;
+}
 /* Restaurant List */
 
 .restaurant-item{

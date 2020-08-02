@@ -1,17 +1,19 @@
 import React, { useState }from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useHistory } from 'react-router-dom'
 import {TextField, makeStyles} from '@material-ui/core'
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import OutsideClickHandler from 'react-outside-click-handler';
 
 // component
 import LoginWindow from '../Widgets/LoginWindow'
 import SignupWindow from '../Widgets/SignupWindow'
 
 // redux
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { userLogout } from '../../actions/userAction'
 
 // icons
-import {FaRegUserCircle} from 'react-icons/fa'
+import {FaRegUserCircle, BsPeopleCircle, RiLogoutBoxRLine} from 'react-icons/all'
 
 import './Widgets.css'
 
@@ -74,6 +76,38 @@ const SearchBar = () => {
     )
 }
 
+const UserWindow = props => {
+
+    const dispatch = useDispatch()
+    let location = useLocation()
+    let history = useHistory()
+
+    const handleLogout = () => {
+        dispatch(userLogout())
+        props.setShowUserWindow(false)
+        if (location.pathname === '/profile') {
+            history.push('/')
+        }
+    }
+
+    return (
+        <OutsideClickHandler onOutsideClick={() => props.setShowUserWindow(false)}>
+            <menu className="user-window-wrapper">
+                <Link to="/profile">
+                <div className="user-window-btn">
+                    <BsPeopleCircle />
+                    <span>About Me</span>
+                </div>
+                </Link>
+                <div className="user-window-btn" onClick={() => handleLogout()}>
+                    <RiLogoutBoxRLine />
+                    <span>Log Out</span>
+                </div>
+            </menu>
+        </OutsideClickHandler>
+    )
+}
+
 
 
 const Header = (props) => {
@@ -81,6 +115,7 @@ const Header = (props) => {
     const user = useSelector(state => state.user)
     const [showLogin, setShowLogin] = useState(false)
     const [showSignup, setShowSignup] = useState(false)
+    const [showUserWindow, setShowUserWindow] = useState(false)
 
 
     return (
@@ -92,14 +127,18 @@ const Header = (props) => {
                 <SearchBar/>
                 {
                     user.isLogIn ?
-                    <Link id="restaurant-header-log-in" to="/profile" >
+                    <div id="restaurant-header-log-in" onClick={() => setShowUserWindow(true)}>
                         <span id="svg-container"><FaRegUserCircle/></span>
                         <span>{ user.username }</span>
-                    </Link> :
+                    </div> :
                     <div id="restaurant-header-log-in" onClick={() => setShowLogin(true)}>
                         <span id="svg-container"><FaRegUserCircle/></span>
                         <span>LOG IN</span>
                     </div>
+                }
+                {
+                    showUserWindow && 
+                    <UserWindow setShowUserWindow={setShowUserWindow}/>
                 }
             </header>
             {

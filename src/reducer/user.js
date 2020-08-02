@@ -7,22 +7,22 @@ const user = {
 
 const userReducer = (state = user, action) => {
 
-    const { user } = action
+    const { userInfo } = action
 
     switch(action.type) {
         case 'GOOGLE_LOGIN':
             console.log()
             return {
                 isLogIn: true,
-                username: user.name,
-                id: user.googleId,
-                avatar: user.imageUrl
+                username: userInfo.name,
+                id: userInfo.googleId,
+                avatar: userInfo.imageUrl
             }
         case 'FACEBOOK_LOGIN':
             return {
                 isLogIn: true,
-                username: user.name,
-                id: user.id
+                username: userInfo.name,
+                id: userInfo.id
             }
         case 'LOGOUT':
             return user
