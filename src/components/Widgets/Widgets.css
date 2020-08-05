@@ -316,6 +316,13 @@
     line-height: 1.5em;
 }
 
+#review-pop-up-window-comment-sections p {
+    line-height: 1em;
+    font-size: 0.7em;
+    font-weight: bold;
+    color: #ED5A6B;
+}
+
 /* get idea from https://codepen.io/quinlo/pen/ReMRXz */
 .favorite-dishes-ul {
     list-style: none;
@@ -405,14 +412,12 @@
     top: 20%;
     left: 50%;
     width: 20em;
-    font-size: 1em;
+    font-size: 1.2em;
     font-weight: 300;
     line-height: 50px;
     text-align: center;
     border-radius: 4px;
     transform: translate(-50%, 0);
-    background-color: #d2f8dc;
-    color: rgb(75, 155, 66);
     z-index: 999;
 /* https://stackoverflow.com/questions/30125705/css-how-to-make-an-element-fade-in-and-then-fade-out/30125780 */
     -webkit-animation: fadeinout 4s linear forwards;

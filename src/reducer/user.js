@@ -3,6 +3,7 @@ const user = {
     isLogIn: false,
     username: null,
     id: null,
+    token: null,
 }
 
 const userReducer = (state = user, action) => {
@@ -23,6 +24,15 @@ const userReducer = (state = user, action) => {
                 isLogIn: true,
                 username: userInfo.name,
                 id: userInfo.id
+            }
+        case 'EMAIL_LOGIN':
+            return {
+                isLogIn: true,
+                username: userInfo.username,
+                id: userInfo.userId,
+                token: userInfo.token,
+                favorites: [],
+                reviews: []
             }
         case 'LOGOUT':
             return user

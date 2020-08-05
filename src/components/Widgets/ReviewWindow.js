@@ -4,6 +4,8 @@ import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
 import ImageUploader from 'react-images-upload';
 import OutsideClickHandler from 'react-outside-click-handler';
+import axios from 'axios';
+import { useSelector } from 'react-redux'
 
 // icon
 import { BsX } from "react-icons/bs";
@@ -94,19 +96,62 @@ const ReviewWindow = props => {
     const [hoverDollar, setHoverDollar] = useState(-1)
     const [uploadPic, setUploadPic] = useState([])
     const [favoriteDish, setFavoriteDish] = useState([])
+    const [review, setReview] = useState("")
+    const [errorMsg, setErrorMsg] = useState("")
+
+    const user = useSelector(state => state.user)
 
     // adding dishes and remove dishes
     const handleDishes = (e) => {
         let dish = e.target.value
-        setFavoriteDish(prevState => {
-            let index = prevState.indexOf(dish)
-            if (index > -1) {
-                prevState.splice(index, 1)
-                return prevState
-            } else {
-                return prevState.concat(dish)
+        let lst = favoriteDish
+        let index = lst.indexOf(dish)
+        if (index > -1) {
+            lst.splice(index, 1)
+        } else {
+            lst.push(dish)
+        }
+        setFavoriteDish(lst)
+    }
+
+    const validateInput = () => {
+        if (review === '' || review.length < 10) {
+            setErrorMsg('The review can not be less than 10 words')
+            return false
+        }
+        return true
+    }
+
+    const handleSubmit = () => {
+        const isValid = validateInput()
+        if (isValid) {
+            const data = new FormData()
+
+            for (const file of uploadPic) {
+                data.append('files[]', file, file.name);
             }
-        })
+            data.set('id', user.id)
+            data.set('review', review)
+            data.set('rate', rate)
+            data.set('dollar', dollar)
+            data.set('favoriteDish', favoriteDish)
+
+            axios.post(
+                'http://localhost:8080/api/review',
+                data, 
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        'Authorization': `Bearer ${user.token}`
+                    }
+                }).then(res => {
+                    // if success
+                    props.setShowPopUp(false)
+                    console.log(res)
+                }).catch(err => {
+                console.log(err)
+            })
+        } 
     }
 
 
@@ -128,7 +173,8 @@ const ReviewWindow = props => {
                 </section>
                 <section id="review-pop-up-window-comment-sections">
                     <div>Write you Review</div>
-                    <textarea placeholder="Write your review"/>
+                    <textarea placeholder="Write your review" value={review} required onChange={e => setReview(e.target.value)}/>
+                    {errorMsg !== '' ? <p>{errorMsg}</p> : <p></p>}
                 </section>
                 <section id="review-pop-up-window-favorite-dishes-section">
                     <div>Favorite Dishes</div>
@@ -154,7 +200,7 @@ const ReviewWindow = props => {
                     <ImageUploader
                         withIcon={true}
                         buttonText='Choose images'
-                        onChange={(pic) => setUploadPic(prevState => prevState.concat(pic))}
+                        onChange={(pic) => {setUploadPic(prevState => prevState.concat(pic)); console.log(uploadPic)}}
                         imgExtension={['.jpg', '.png']}
                         label={"Max file size: 5mb, accepted: jpg | png"}
                         maxFileSize={5242880}
@@ -162,7 +208,7 @@ const ReviewWindow = props => {
                     />
                 </section>
                 <section>
-                    <button id="add-review-btn">Add Review</button>
+                    <button id="add-review-btn" onClick={() => handleSubmit()}>Add Review</button>
                 </section>
             </div>
             </OutsideClickHandler>

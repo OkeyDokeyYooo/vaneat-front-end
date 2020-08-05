@@ -69,6 +69,24 @@
     font-size: 20px;
 }
 
+.detail-restaurant-location-hour-section {
+    display: flex;
+}
+
+.google-map-container {
+    width: 315px;
+    border: 1px solid #e6e6e6;
+    overflow: hidden;
+    color: #2b273c;
+    font-weight: 700;
+    font-size: 14px;
+    margin-right: 100px;
+}
+
+.google-map-address-container {
+    padding: 16px;
+}
+
 .hours-table {
     font-size: 12px;
 }

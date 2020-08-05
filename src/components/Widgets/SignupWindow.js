@@ -1,14 +1,16 @@
 /* eslint-disable no-useless-escape */
 import React, {useState}from 'react'
-import OutsideClickHandler from 'react-outside-click-handler';
+import OutsideClickHandler from 'react-outside-click-handler'
+import axios from 'axios'
 
 // material ui
-import {TextField, InputAdornment, IconButton, FormControl, InputLabel, FilledInput, FormHelperText} from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import {TextField, InputAdornment, IconButton, FormControl, InputLabel, FilledInput, FormHelperText} from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
 
 // icons
-import { BsX } from "react-icons/bs";
+import { BsX } from "react-icons/bs"
 import {MdVisibility, MdVisibilityOff} from "react-icons/md"
+import API from '../../API'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -44,7 +46,7 @@ const signUpInitState = {
 }
 
 
-const SignupForm = () => {
+const SignupForm = props => {
 
     const classes = useStyles()
     const [values, setValues] = useState(signUpInitState)
@@ -77,7 +79,7 @@ const SignupForm = () => {
         }
 
         // check email address is valid format
-        const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        const re = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
         if (!re.test(values.email)){
             emailError = 'The input is not a valid email address'
         }
@@ -88,7 +90,7 @@ const SignupForm = () => {
         }
 
         // check confirm password match with password
-        if (values.confirmPassword.length < 6 || values.confirmPassword === values.password) {
+        if (values.confirmPassword.length < 6 || values.confirmPassword !== values.password) {
             confirmPasswordError = 'Passwords do not match'
         }
 
@@ -112,8 +114,24 @@ const SignupForm = () => {
         const isValid = validateInput()
         if (isValid) {
             // here submit user signup form to backend
-            console.log(values)
-            setValues(signUpInitState)
+            axios.post(API.signup, {
+                username: values.username,
+                email: values.email,
+                password: values.password
+            }).then(res => {
+                if (res.status === 201) {
+                    props.setShowSignup(false); 
+                    props.setShowLogin(true)
+                    setValues(signUpInitState)
+                }
+            }).catch(err => {
+                if (err.response.status === 409) {
+                    setValues({
+                        ...values,
+                        emailError: 'Email Already been taken'
+                    })
+                }
+            })
         }
     }
 
@@ -122,6 +140,7 @@ const SignupForm = () => {
             <TextField
                 error={values.usernameError !== '' ? true : false}
                 helperText={values.usernameError !== '' ? values.usernameError : ''}
+                value={values.username}
                 variant='filled'
                 label='User Name'
                 onChange={handleChange('username')}
@@ -129,6 +148,7 @@ const SignupForm = () => {
             <TextField 
                 error={values.emailError !== '' ? true : false}
                 helperText={values.emailError !== '' ? values.emailError : ''}
+                value={values.email}
                 variant='filled'
                 label='Email'
                 onChange={handleChange('email')}
@@ -198,7 +218,7 @@ const SignupWindow = (props) => {
                         Sign Up For An Account
                     </div>
                     <div id="pop-up-window-body">
-                        <SignupForm />
+                        <SignupForm setShowSignup={props.setShowSignup} setShowLogin={props.setShowLogin}/>
                     </div>
                     <div id="pop-up-window-bottom">
                         <p>Already Have An Account? <span onClick={() => {props.setShowSignup(false); props.setShowLogin(true)}}>Log In</span></p>

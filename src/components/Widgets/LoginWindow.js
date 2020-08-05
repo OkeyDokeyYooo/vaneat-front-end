@@ -6,7 +6,7 @@ import OutsideClickHandler from 'react-outside-click-handler';
 
 // redux
 import { useDispatch } from 'react-redux'
-import { googleLogin, facebookLogin } from '../../actions/userAction'
+import { googleLogin, facebookLogin, emailLogin} from '../../actions/userAction'
 
 // material ui
 import {TextField, InputAdornment, IconButton, FormControl, InputLabel, FilledInput} from '@material-ui/core';
@@ -17,6 +17,10 @@ import { BsX } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
 import {FaFacebookSquare} from 'react-icons/fa'
 import {MdVisibility, MdVisibilityOff} from "react-icons/md"
+
+// api 
+import API from '../../API'
+import Axios from 'axios';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -47,10 +51,13 @@ const loginInitState = {
     passwordError: '',
 }
 
-const LoginForm = () => {
+const LoginForm = props => {
     const classes = useStyles()
 
     const [values, setValues] = useState(loginInitState)
+
+    // redux
+    const dispatch = useDispatch()
 
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
@@ -89,7 +96,22 @@ const LoginForm = () => {
         const isValid = validateInput()
         if (isValid) {
             console.log(values)
-            setValues(loginInitState)
+            Axios.post(API.login, {
+                email: values.email,
+                password: values.password
+            }).then(res => {
+                // console.log(res)
+                dispatch(emailLogin(res.data))
+                setValues(loginInitState)
+                props.setShowLogin(false)
+            }).catch(err => {
+                // if there is error during authentication
+                setValues({
+                    ...values,
+                    emailError: "Authentication Failed!",
+                    passwordError: "Authentication Failed!"
+                })
+            })
         }
     }
 
@@ -98,6 +120,7 @@ const LoginForm = () => {
             <TextField 
                 variant="filled" 
                 type="email"
+                value={values.email}
                 error={values.emailError !== '' ? true : false}
                 helperText={values.emailError !== '' ? values.emailError : ''}    
                 label="Email" 
@@ -202,7 +225,7 @@ const LoginWindow = (props) => {
                                 <button id="log-in-btn" onClick={() => setShowLoginForm(true)}>
                                     <span>LOG IN WITH EMAIL</span>
                                 </button>:
-                                <LoginForm />
+                                <LoginForm setShowLogin={props.setShowLogin}/>
                             }
 
                         </section>

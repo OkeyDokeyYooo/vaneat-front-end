@@ -1,8 +1,12 @@
-import React, {useEffect, useState, useCallback, memo} from 'react'
+import React, {useEffect, useState } from 'react'
 import Rating from '@material-ui/lab/Rating';
 import { withStyles } from '@material-ui/core/styles';
 import moment from 'moment';
-// import { GoogleMap, LoadScript } from '@react-google-maps/api';
+import {
+    StaticGoogleMap,
+    Marker,
+} from 'react-static-google-map';
+import { useSelector } from 'react-redux';
 
 // components
 import ReviewItem from '../Widgets/ReviewItem'
@@ -14,45 +18,26 @@ import AlertWindow from '../Widgets/AlertWindow'
 import { MdRateReview, MdDirections } from 'react-icons/md'
 import { BsBookmarkPlus } from 'react-icons/bs'
 import { FaShare } from 'react-icons/fa'
-import { MdContentCopy } from 'react-icons/all'
+import { MdContentCopy, MdWarning} from 'react-icons/all'
 
 // need to get the detail information from backend 
 import fakeRest from '../../fakeRest.json'
-
-// const containerStyle = {
-//     width: '400px',
-//     height: '400px'
-// };
-   
-// const center = {
-//     lat: -3.745,
-//     lng: -38.523
-// };
 
 
 const DetailRestaurantPage = (props) => {
     const name = props.match.params.restaurantName
 
+    const user = useSelector(state => state.user)
     const [restInfo, setRestInfo] = useState(null)
     const [rateColor, setRateColor] = useState(null)
     const [showPopUp, setShowPopUp] = useState(false)
     const [showAlert, setShowAlert] = useState({
         show: false,
         text: "Restaurant URL Copied to Clipboard",
-        icon: <MdContentCopy />
+        icon: <MdContentCopy />,
+        backgroundColor: '#d2f8dc',
+        color: '#4B9B42'
     })
-
-    // const [map, setMap] = useState(null)
-
-    // const onLoad = useCallback(function callback(map) {
-    //     const bounds = new window.google.maps.LatLngBounds();
-    //     map.fitBounds(bounds);
-    //     setMap(map)
-    // }, [])
-
-    // const onUnmount = useCallback(function callback(map) {
-    //     setMap(null)
-    // }, [])
 
     const StyledRating = withStyles({
         iconFilled: {
@@ -65,11 +50,6 @@ const DetailRestaurantPage = (props) => {
     })(Rating);
 
     const alertWindowTimeOut = () => {
-        setShowAlert({
-            show: true,
-            text: "Restaurant URL Copied to Clipboard",
-            icon: <MdContentCopy />
-        });
         setTimeout(() => {
             setShowAlert(prevState => {
                 return {
@@ -78,6 +58,21 @@ const DetailRestaurantPage = (props) => {
                 }
             })
         }, 4000)
+    }
+
+    const handleAddReview = () => {
+        if (user.isLogIn) {
+            setShowPopUp(true)
+        } else {
+            setShowAlert({
+                show: true,
+                text: "Please Login First",
+                icon: <MdWarning />,
+                backgroundColor: '#f4c2c2',
+                color: '#ff726f'  
+            })
+            alertWindowTimeOut()
+        }
     }
 
     // when this component mount to the DOM = componentDidMount
@@ -125,7 +120,7 @@ const DetailRestaurantPage = (props) => {
                                 <span id="detail-restaurant-num-rate">{restInfo.reviews.length} reviews</span>
                             </div>
                             <div id="detail-page-btn-section">
-                                <button id="add-review-btn" onClick={() => setShowPopUp(true)}>
+                                <button id="add-review-btn" onClick={() => handleAddReview()}>
                                     <MdRateReview />
                                     <span>Add Review</span>
                                 </button>
@@ -139,43 +134,64 @@ const DetailRestaurantPage = (props) => {
                                     <BsBookmarkPlus />
                                     <span>Favorite</span>
                                 </button>
-                                <button onClick={() => {navigator.clipboard.writeText(window.location.href); alertWindowTimeOut()}}>
+                                <button 
+                                    onClick={() => {
+                                        navigator.clipboard.writeText(window.location.href); 
+                                        setShowAlert({
+                                            show: true,
+                                            text: "Restaurant URL Copied to Clipboard",
+                                            icon: <MdContentCopy />,
+                                            backgroundColor: '#d2f8dc',
+                                            color: '#4B9B42'    
+                                        });
+                                        alertWindowTimeOut()
+                                    }}>
                                     <FaShare />
                                     <span>Share</span>
                                 </button>
                             </div>
                         </section>
                         <hr/>
-                        <section>
+                        <section >
                             <h3>Location & Hours</h3>
-                            <table className="hours-table">
-                                <tbody>
-                                {   
-                                    Object.entries(restInfo.hours).map(([key, val]) => {
-                                        let currDay = moment().format('ddd')
-                                        let showOpening = false
-                                        let isOpening = false
-                                        // check if opening
-                                        if (currDay === key) {
-                                            showOpening = true
-                                            let timeArr = val.split(" - ")
-                                            let startTime = moment(timeArr[0], "h:mm a")
-                                            let endTime = moment(timeArr[1], "h:mm a")
-                                            if (moment().isBetween(startTime, endTime)) {
-                                                isOpening = true
+                            <div className="detail-restaurant-location-hour-section">
+                                <a className="google-map-container" href={`http://maps.google.com/?q=${restInfo.location}`} target="_blank" el="noopener noreferrer">
+                                    <StaticGoogleMap size="315x150" className="img-fluid" apiKey="AIzaSyBRDDEjs_ExPf0quVz7YczSZhkeQv70QdY">
+                                        <Marker location={restInfo.location} color="red" />
+                                    </StaticGoogleMap>
+                                    <div className="google-map-address-container">
+                                        {restInfo.location}
+                                    </div>
+                                </a>
+                                <table className="hours-table">
+                                    <tbody>
+                                    {   
+                                        Object.entries(restInfo.hours).map(([key, val]) => {
+                                            let currDay = moment().format('ddd')
+                                            let showOpening = false
+                                            let isOpening = false
+                                            // check if opening
+                                            if (currDay === key) {
+                                                showOpening = true
+                                                let timeArr = val.split(" - ")
+                                                let startTime = moment(timeArr[0], "h:mm a")
+                                                let endTime = moment(timeArr[1], "h:mm a")
+                                                if (moment().isBetween(startTime, endTime)) {
+                                                    isOpening = true
+                                                }
                                             }
-                                        }
-                                        return (
-                                            <tr key={key}>
-                                                <th className="hours-table-col1">{key}</th>
-                                                <th className="hours-table-col2">{val}</th> 
-                                                <th className="hours-table-col3">{showOpening ? isOpening ? "Opening now" : "Closed now" : ""}</th>
-                                            </tr>
-                                        )
-                                    })
-                                }
-                                </tbody>
-                            </table>
+                                            return (
+                                                <tr key={key}>
+                                                    <th className="hours-table-col1">{key}</th>
+                                                    <th className="hours-table-col2">{val}</th> 
+                                                    <th className="hours-table-col3">{showOpening ? isOpening ? "Opening now" : "Closed now" : ""}</th>
+                                                </tr>
+                                            )
+                                        })
+                                    }
+                                    </tbody>
+                                </table>
+                            </div>
                         </section>
                         <hr />
                         <section className="detail-restaurant-page-dishes-section">
@@ -211,10 +227,10 @@ const DetailRestaurantPage = (props) => {
             }
             {
                 showAlert.show &&
-                <AlertWindow icon={showAlert.icon} text={showAlert.text} showAlert={showAlert}/>
+                <AlertWindow icon={showAlert.icon} text={showAlert.text} showAlert={showAlert} backgroundColor={showAlert.backgroundColor} color={showAlert.color}/>
             }
         </div>
     )
 }
 
-export default memo(DetailRestaurantPage)
+export default DetailRestaurantPage

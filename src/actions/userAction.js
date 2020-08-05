@@ -12,8 +12,16 @@ export const facebookLogin = (userInfo) => {
     }
 }
 
+export const emailLogin = (userInfo) => {
+    return {
+        type: 'EMAIL_LOGIN',
+        userInfo: userInfo
+    }
+}
+
 export const userLogout = () => {
     return {
         type: 'LOGOUT'
     }
 }
+
