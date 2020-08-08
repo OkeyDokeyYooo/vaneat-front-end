@@ -22,6 +22,12 @@ import {MdVisibility, MdVisibilityOff} from "react-icons/md"
 // api 
 import API from '../../API'
 
+// react alert
+import { transitions, positions, Provider as AlertProvider } from 'react-alert'
+import AlertTemplate from 'react-alert-template-basic'
+import { useAlert } from 'react-alert'
+
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
