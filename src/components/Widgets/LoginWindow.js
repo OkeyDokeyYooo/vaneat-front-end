@@ -4,6 +4,7 @@ import { GoogleLogin } from 'react-google-login'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import OutsideClickHandler from 'react-outside-click-handler'
 import Axios from 'axios'
+import { useAlert } from 'react-alert'
 
 // redux
 import { useDispatch } from 'react-redux'
@@ -155,6 +156,7 @@ const LoginForm = props => {
 const LoginWindow = (props) => {
 
     const [showLoginForm, setShowLoginForm] = useState(false)
+    const alert = useAlert()
 
     // redux
     const dispatch = useDispatch()
@@ -167,7 +169,7 @@ const LoginWindow = (props) => {
                 dispatch(googleLogin(response.data))
                 props.setShowLogin(false)
             } else {
-                console.log("Error to Log in with Google")
+                alert.error("Error to Log in with Google")
             }
         })
     }
@@ -181,7 +183,7 @@ const LoginWindow = (props) => {
                 dispatch(facebookLogin(response.data))
                 props.setShowLogin(false)
             } else {
-                console.log("Error to Log in with Facebook")
+                alert.log("Error to Log in with Facebook")
             }
         })
     }
