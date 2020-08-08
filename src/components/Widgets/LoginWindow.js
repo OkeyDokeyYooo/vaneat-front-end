@@ -170,7 +170,14 @@ const LoginWindow = (props) => {
             } else {
                 alert.error("Error to Log in with Google")
             }
+        }).catch(err => {
+            console.log(err)
+            alert.error("Error to Log in with Google")
         })
+    }
+
+    const handleThirdPartyLoginFail = (res) => {
+        alert.error("Some Thing Went Wrong")
     }
 
     const handleFacebookLogin = (res) => {
@@ -212,7 +219,7 @@ const LoginWindow = (props) => {
                                 clientId="564996899561-b38remq66lcdtkhge5l8bgr33putgero.apps.googleusercontent.com"
                                 buttonText="Login"
                                 onSuccess={handleGoogleLogin}
-                                onFailure={handleGoogleLogin}
+                                onFailure={handleThirdPartyLoginFail}
                                 isSignedIn={false}
                                 cookiePolicy={'single_host_origin'}
                                 render={renderProps => (
@@ -224,6 +231,7 @@ const LoginWindow = (props) => {
                                 fields="name,email,picture"
                                 icon="fa-facebook"
                                 callback={handleFacebookLogin} 
+                                onFailure={handleThirdPartyLoginFail}
                                 render={renderProps => (
                                     <LoginButton onClick={renderProps.onClick} title={"CONTINUE WITH FACEBOOK"} icon={<FaFacebookSquare style={{color: '#3b5998'}}/>}/>
                                 )}
