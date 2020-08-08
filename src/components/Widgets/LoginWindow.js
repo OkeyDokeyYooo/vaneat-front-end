@@ -2,25 +2,25 @@
 import React, {useState} from 'react'
 import { GoogleLogin } from 'react-google-login'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
-import OutsideClickHandler from 'react-outside-click-handler';
+import OutsideClickHandler from 'react-outside-click-handler'
+import Axios from 'axios'
 
 // redux
 import { useDispatch } from 'react-redux'
 import { googleLogin, facebookLogin, emailLogin} from '../../actions/userAction'
 
 // material ui
-import {TextField, InputAdornment, IconButton, FormControl, InputLabel, FilledInput} from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import {TextField, InputAdornment, IconButton, FormControl, InputLabel, FilledInput} from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
 
 // react-icon
-import { BsX } from "react-icons/bs";
-import { FcGoogle } from "react-icons/fc";
+import { BsX } from "react-icons/bs"
+import { FcGoogle } from "react-icons/fc"
 import {FaFacebookSquare} from 'react-icons/fa'
 import {MdVisibility, MdVisibilityOff} from "react-icons/md"
 
 // api 
 import API from '../../API'
-import Axios from 'axios';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -160,14 +160,30 @@ const LoginWindow = (props) => {
     const dispatch = useDispatch()
 
     const handleGoogleLogin = (res) => {
-        console.log(res)
-        dispatch(googleLogin(res.profileObj))
-        props.setShowLogin(false)
+        Axios.post("http://localhost:8080/api/user/google", {
+            tokenId: res.tokenId
+        }).then(response => {
+            if (response.status === 200) {
+                dispatch(googleLogin(response.data))
+                props.setShowLogin(false)
+            } else {
+                console.log("Error to Log in with Google")
+            }
+        })
     }
 
     const handleFacebookLogin = (res) => {
-        dispatch(facebookLogin(res))
-        props.setShowLogin(false)
+        Axios.post("http://localhost:8080/api/user/facebook", {
+            accessToken: res.accessToken,
+            userID: res.userID
+        }).then(response => {
+            if (response.status === 200) {
+                dispatch(facebookLogin(response.data))
+                props.setShowLogin(false)
+            } else {
+                console.log("Error to Log in with Facebook")
+            }
+        })
     }
 
     const LoginButton = (props) => {
@@ -192,7 +208,7 @@ const LoginWindow = (props) => {
                     <div id="pop-up-window-body">
                         <section id="third-party-log-in-section">
                             <GoogleLogin
-                                clientId="1017526824029-2bmodiavf0sdhiegcf7iua2gvln4d8nt.apps.googleusercontent.com"
+                                clientId="564996899561-b38remq66lcdtkhge5l8bgr33putgero.apps.googleusercontent.com"
                                 buttonText="Login"
                                 onSuccess={handleGoogleLogin}
                                 onFailure={handleGoogleLogin}
