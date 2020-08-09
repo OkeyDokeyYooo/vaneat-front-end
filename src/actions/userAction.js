@@ -26,3 +26,16 @@ export const userLogout = () => {
     }
 }
 
+export const addFavorite = (favoriteId) => {
+    return {
+        type: 'ADD_FAVORITE',
+        favoriteId: favoriteId
+    }
+}
+
+export const removeFavorite = (favoriteId) => {
+    return {
+        type: 'REMOVE_FAVORITE',
+        favoriteId: favoriteId
+    }
+}

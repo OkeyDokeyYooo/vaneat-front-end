@@ -6,38 +6,39 @@ import {
     StaticGoogleMap,
     Marker,
 } from 'react-static-google-map';
-import { useSelector} from 'react-redux';
+import { useSelector, useDispatch} from 'react-redux';
+import { useAlert } from 'react-alert'
+import { addFavorite, removeFavorite} from '../../actions/userAction'
 
 // components
 import ReviewItem from '../Widgets/ReviewItem'
 import DishesSlider from '../Widgets/DishesSlider'
 import ReviewWindow from '../Widgets/ReviewWindow'
-import AlertWindow from '../Widgets/AlertWindow'
+// import AlertWindow from '../Widgets/AlertWindow'
 
 // icon
-import { MdRateReview, MdDirections } from 'react-icons/md'
-import { BsBookmarkPlus } from 'react-icons/bs'
-import { FaShare } from 'react-icons/fa'
-import { MdContentCopy, MdWarning} from 'react-icons/all'
+import { MdRateReview, MdDirections, IoMdHeartDislike, IoMdHeart, FaShare} from 'react-icons/all'
+// import { MdContentCopy, MdWarning} from 'react-icons/all'
 
 // need to get the detail information from backend 
-import fakeRest from '../../fakeRest.json'
 import Axios from 'axios';
 import API from '../../API';
 
 
 const DetailRestaurantPage = (props) => {    
     const user = useSelector(state => state.user)
+    const dispatch = useDispatch()
+    const alert = useAlert()
     const [restInfo, setRestInfo] = useState(null)
     const [rateColor, setRateColor] = useState(null)
     const [showPopUp, setShowPopUp] = useState(false)
-    const [showAlert, setShowAlert] = useState({
-        show: false,
-        text: "Restaurant URL Copied to Clipboard",
-        icon: <MdContentCopy />,
-        backgroundColor: '#d2f8dc',
-        color: '#4B9B42'
-    })
+    // const [showAlert, setShowAlert] = useState({
+    //     show: false,
+    //     text: "Restaurant URL Copied to Clipboard",
+    //     icon: <MdContentCopy />,
+    //     backgroundColor: '#d2f8dc',
+    //     color: '#4B9B42'
+    // })
 
     const StyledRating = withStyles({
         iconFilled: {
@@ -49,30 +50,88 @@ const DetailRestaurantPage = (props) => {
         },
     })(Rating);
 
-    const alertWindowTimeOut = () => {
-        setTimeout(() => {
-            setShowAlert(prevState => {
-                return {
-                    ...prevState,
-                    show: false
-                }
-            })
-        }, 4000)
-    }
+    // const alertWindowTimeOut = () => {
+    //     setTimeout(() => {
+    //         setShowAlert(prevState => {
+    //             return {
+    //                 ...prevState,
+    //                 show: false
+    //             }
+    //         })
+    //     }, 4000)
+    // }
 
     const handleAddReview = () => {
         if (user.isLogIn) {
             setShowPopUp(true)
         } else {
-            setShowAlert({
-                show: true,
-                text: "Please Login First",
-                icon: <MdWarning />,
-                backgroundColor: '#f4c2c2',
-                color: '#ff726f'  
-            })
-            alertWindowTimeOut()
+            alert.info("Please Login First")
+            // setShowAlert({
+            //     show: true,
+            //     text: "Please Login First",
+            //     icon: <MdWarning />,
+            //     backgroundColor: '#f4c2c2',
+            //     color: '#ff726f'  
+            // })
+            // alertWindowTimeOut()
         }
+    }
+
+    const handleFavorite = () => {
+        if (!user.isLogIn) {
+            alert.info("Please Login First")
+        } else {
+            Axios.post(API.addFavorite, {
+                restaurantId: props.match.params.restaurantId,
+            }, {
+                headers: {
+                    'Authorization': `Bearer ${user.token}`
+                }
+            }).then(res => {
+                if (res.status === 200){
+                    dispatch(addFavorite(restInfo.rest._id))
+                    alert.success('Favorite Added')
+                } else {
+                    alert.error('Favorite added failed')
+                }
+            }).catch(err => {
+                alert.error(`Error Code: ${err.response}`)
+            })
+        }
+    } 
+
+    const handleUnFavorite = () => {
+        if (!user.isLogIn) {
+            alert.info("Please Login First")
+        } else {
+            Axios.post(API.removeFavorite, {
+                restaurantId: props.match.params.restaurantId,
+            }, {
+                headers: {
+                    'Authorization': `Bearer ${user.token}`
+                }
+            }).then(res => {
+                if (res.status === 200){
+                    dispatch(removeFavorite(restInfo.rest._id))
+                    alert.success('Favorite removed')
+                } else {
+                    alert.error('Failed to remove')
+                }
+            })
+        }
+    }
+
+    const handleShare = () => {
+        navigator.clipboard.writeText(window.location.href);
+        alert.success("Restaurant URL Copied to Clipboard") 
+        // setShowAlert({
+        //     show: true,
+        //     text: "Restaurant URL Copied to Clipboard",
+        //     icon: <MdContentCopy />,
+        //     backgroundColor: '#d2f8dc',
+        //     color: '#4B9B42'    
+        // });
+        // alertWindowTimeOut()
     }
 
     // when this component mount to the DOM = componentDidMount
@@ -140,22 +199,19 @@ const DetailRestaurantPage = (props) => {
                                         <span>Direction</span>
                                     </a>
                                 </button>
-                                <button>
-                                    <BsBookmarkPlus />
-                                    <span>Favorite</span>
-                                </button>
+                                {
+                                    !user.favorites.includes(restInfo.rest._id) ?
+                                    <button onClick={handleFavorite}>
+                                        <IoMdHeart />
+                                        <span>Like</span>
+                                    </button> :
+                                    <button onClick={handleUnFavorite} id="unlike-btn">
+                                        <IoMdHeartDislike />
+                                        Dislike
+                                    </button>
+                                }
                                 <button 
-                                    onClick={() => {
-                                        navigator.clipboard.writeText(window.location.href); 
-                                        setShowAlert({
-                                            show: true,
-                                            text: "Restaurant URL Copied to Clipboard",
-                                            icon: <MdContentCopy />,
-                                            backgroundColor: '#d2f8dc',
-                                            color: '#4B9B42'    
-                                        });
-                                        alertWindowTimeOut()
-                                    }}>
+                                    onClick={handleShare}>
                                     <FaShare />
                                     <span>Share</span>
                                 </button>
@@ -216,14 +272,15 @@ const DetailRestaurantPage = (props) => {
                             <h3>Reviews</h3>
                             {   
                                 restInfo.reviews &&
-                                restInfo.reviews.map((review, index) => {
+                                restInfo.reviews.map((review, i) => {
                                     return (
-                                        <React.Fragment key={index}>
+                                        <React.Fragment key={review.createdAt}>
                                             <ReviewItem 
-                                                key={index} 
+                                                key={i}
                                                 author={review.username}
                                                 rate={review.rate}
                                                 review={review.review}
+                                                images={review.image}
                                                 date={moment(review.createdAt).format('lll')}
                                             />
                                             <hr />
@@ -239,10 +296,10 @@ const DetailRestaurantPage = (props) => {
                 showPopUp && restInfo &&
                 <ReviewWindow dishes={restInfo.rest.dishes} setShowPopUp={setShowPopUp} restaurantId={restInfo.rest._id}/>
             }
-            {
+            {/* {
                 showAlert.show &&
                 <AlertWindow icon={showAlert.icon} text={showAlert.text} showAlert={showAlert} backgroundColor={showAlert.backgroundColor} color={showAlert.color}/>
-            }
+            } */}
         </div>
     )
 }

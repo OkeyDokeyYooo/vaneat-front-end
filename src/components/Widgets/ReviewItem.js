@@ -34,6 +34,17 @@ const ReviewItem = props => {
                 <p className="review-item-comment">
                     {props.review}
                 </p>
+                <div className="review-item-image-section">
+                    {
+                        props.images.map((image, index) => {
+                            return (
+                                <div className="review-item-image-wrapper">
+                                    <img src={image} alt={`${index}`}/>
+                                </div>
+                            )
+                        })
+                    }
+                </div>
             </div>
         </div>
     )

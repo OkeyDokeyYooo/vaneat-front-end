@@ -44,14 +44,25 @@ const RestaurantSection = props => {
             </div>
             <div id="rate">
                 <StyledRating 
-                    value={Number(restaurant.rate)} 
+                    value={Number(props.review.rate)} 
                     readOnly 
                     precision={0.5}
                     size="medium"    
                 />
-                <span>{moment(props.review.createAt).format('lll')}</span>
+                <span id="rate-time">{moment(props.review.createAt).format('lll')}</span>
             </div>
             <p>{props.review.review}</p>
+            <div className="review-item-image-section">
+            {
+                props.review.image.map((img, index) => {
+                    return (
+                        <div className="review-item-image-wrapper" key={index}>
+                            <img src={img} alt={`${index}`}/>
+                        </div>
+                    )
+                })
+            }
+            </div>
         </React.Fragment>
     )
 }

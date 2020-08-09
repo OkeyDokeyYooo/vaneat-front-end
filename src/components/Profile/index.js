@@ -39,7 +39,7 @@ const Profile = props => {
                             <div className="profile-user-count-wrapper">
                                 <div className="profile-user-count" onClick={() => setSection('reviews')}>
                                     <div className="profile-user-count-number">
-                                        142
+                                        {user.reviews.length}
                                     </div>
                                     <div className="profile-user-count-text">
                                         Reviews
@@ -47,7 +47,7 @@ const Profile = props => {
                                 </div>
                                 <div className="profile-user-count" onClick={() => setSection('bookmarks')}>
                                     <div className="profile-user-count-number">
-                                        20
+                                        {user.favorites.length}
                                     </div>
                                     <div className="profile-user-count-text">
                                         Favorite

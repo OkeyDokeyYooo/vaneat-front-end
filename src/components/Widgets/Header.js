@@ -89,9 +89,12 @@ const UserWindow = props => {
     const dispatch = useDispatch()
     let location = useLocation()
     let history = useHistory()
+    const [cookies, setCookie, removeCookie] = useCookies([]);
+
 
     const handleLogout = () => {
         dispatch(userLogout())
+        removeCookie('access_token', {path: '/'})
         props.setShowUserWindow(false)
         if (location.pathname === '/profile') {
             history.push('/')

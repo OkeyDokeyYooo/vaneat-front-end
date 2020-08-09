@@ -281,6 +281,20 @@
     word-break: break-all;
 }
 
+.review-item-image-section {
+    display: flex;
+}
+
+.review-item-image-wrapper {
+    margin-right: 10px;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.review-item-image-section img {
+    height: 8em;
+}
+
 /* review window */
 
 #review-pop-up-window {
@@ -406,6 +420,16 @@
 #add-review-btn:hover{
     background-color: #EA120E;
     cursor: pointer;
+}
+
+#unlike-btn {
+    background: #ED5A6B !important;
+    border: 1px solid #ED5A6B !important;
+    font-size: 1em !important;
+    color: #fff !important;
+    padding: .5em 1em !important;
+    border-radius: 4px !important;
+    font-weight: 300 !important;
 }
 
 /* Alert Window */

@@ -1,4 +1,4 @@
-import React, { useEffect }from 'react'
+import React, { useEffect, useState }from 'react'
 import { Link } from 'react-router-dom'
 import {useSelector} from 'react-redux'
 import axios from 'axios'
@@ -9,6 +9,7 @@ import API from '../../API'
 const BookmarkSection = props => {
 
     const user = useSelector(state => state.user)
+    const [favorites, setFavorites] = useState(null)
 
     useEffect(() => {
         axios.get(API.userFavorite, {
@@ -18,7 +19,9 @@ const BookmarkSection = props => {
             }
         })
         .then(res => {
-            console.log(res)
+            if (res.status === 200) {
+                setFavorites(res.data.user_favorites)
+            }
         })
     }, [])
 
@@ -28,9 +31,10 @@ const BookmarkSection = props => {
                 <div className="profile-page-main-body-title">Favorite</div>
                 <div className="profile-favorite-main-body">
                     {
-                        fakeFavorite.map((restaurant, index) => {
+                        favorites &&
+                        favorites.map((restaurant, index) => {
                             return (
-                                <Link className="favorite-container" to={`/restaurants/${restaurant.name}`} key={index}>
+                                <Link className="favorite-container" to={`/restaurants/${restaurant.restaurantId}`} key={index}>
                                     <div className="favorite-image-container">
                                         <img src={restaurant.image} alt={restaurant.name}/>
                                         <span id="favorite-restaurant-rate">
@@ -41,7 +45,7 @@ const BookmarkSection = props => {
                                         {restaurant.name}
                                     </h3>
                                     <h6>
-                                        {restaurant.location}
+                                        {restaurant.address}
                                     </h6>
                                 </Link>
                             )

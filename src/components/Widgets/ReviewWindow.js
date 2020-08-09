@@ -149,7 +149,7 @@ const ReviewWindow = props => {
                 }).then(res => {
                     // if success
                     props.setShowPopUp(false)
-                    console.log(res)
+                    window.location.reload()
                 }).catch(err => {
                 console.log(err)
             })

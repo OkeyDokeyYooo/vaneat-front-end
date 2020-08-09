@@ -183,6 +183,10 @@
     vertical-align: middle;
 }
 
+.profile-page-review-restaurant-section #rate-time {
+    margin-left: 10px;
+}
+
 .profile-favorite-main-body {
     display: flex;
     flex-wrap: wrap;

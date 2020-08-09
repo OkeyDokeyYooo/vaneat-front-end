@@ -10,5 +10,7 @@ module.exports = {
     searchResult: baseURL + '/restaurantsName',
     userReviews: baseURL + '/user/reviews',
     userFavorite: baseURL + '/user/favorites',
-    userCheck: baseURL + '/user/check'
+    userCheck: baseURL + '/user/check',
+    addFavorite: baseURL + '/user/userFavorite',
+    removeFavorite: baseURL + '/user/userUnfavorite'
 }
