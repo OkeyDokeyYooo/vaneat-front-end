@@ -7,6 +7,7 @@ import {  BrowserRouter as Router } from 'react-router-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux'
 import { transitions, positions, Provider as AlertProvider } from 'react-alert'
+import { CookiesProvider } from 'react-cookie';
 import AlertTemplate from 'react-alert-template-basic'
 
 // Redux Set up
@@ -30,11 +31,13 @@ const options = {
 ReactDOM.render(
   // <React.StrictMode>
     <Provider store={store}>
-      <AlertProvider template={AlertTemplate} {...options}>
-        <Router>
-          <App />
-        </Router>
-      </AlertProvider>
+      <CookiesProvider>
+        <AlertProvider template={AlertTemplate} {...options}>
+          <Router>
+            <App />
+          </Router>
+        </AlertProvider>
+      </CookiesProvider>
     </Provider>,
   // </React.StrictMode>,
   document.getElementById('root')

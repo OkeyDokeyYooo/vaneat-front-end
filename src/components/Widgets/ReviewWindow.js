@@ -131,6 +131,7 @@ const ReviewWindow = props => {
                 data.append('files[]', file, file.name);
             }
             data.set('id', user.id)
+            data.set('username', user.username)
             data.set('review', review)
             data.set('rate', rate)
             data.set('dollar', dollar)
@@ -181,6 +182,7 @@ const ReviewWindow = props => {
                     <div>Favorite Dishes</div>
                     <ul className="favorite-dishes-ul">
                         {
+                            props.dishes &&
                             props.dishes.map(dish => {
                                 return (
                                     <li key={dish.tittle}>

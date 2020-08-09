@@ -1,5 +1,6 @@
 import React, { useEffect }from 'react'
 import { Link } from 'react-router-dom'
+import {useSelector} from 'react-redux'
 import axios from 'axios'
 import fakeFavorite from '../../fakeFavorite.json'
 import API from '../../API'
@@ -7,8 +8,15 @@ import API from '../../API'
 
 const BookmarkSection = props => {
 
+    const user = useSelector(state => state.user)
+
     useEffect(() => {
-        axios.get(API.userFavorite + props.userId)
+        axios.get(API.userFavorite, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'Authorization': `Bearer ${user.token}`
+            }
+        })
         .then(res => {
             console.log(res)
         })
@@ -20,9 +28,9 @@ const BookmarkSection = props => {
                 <div className="profile-page-main-body-title">Favorite</div>
                 <div className="profile-favorite-main-body">
                     {
-                        fakeFavorite.map(restaurant => {
+                        fakeFavorite.map((restaurant, index) => {
                             return (
-                                <Link className="favorite-container" to={`/restaurants/${restaurant.name}`}>
+                                <Link className="favorite-container" to={`/restaurants/${restaurant.name}`} key={index}>
                                     <div className="favorite-image-container">
                                         <img src={restaurant.image} alt={restaurant.name}/>
                                         <span id="favorite-restaurant-rate">

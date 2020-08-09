@@ -5,7 +5,10 @@ module.exports = {
     login: baseURL + '/user/login',
     allRestaurant: baseURL + '/restaurants/',
     detailRestaurant: baseURL + '/restaurants/',
-    userFavorite: baseURL + '/user/favorites/',
     allCategory: baseURL + '/category',
-    categoryRestaurant: baseURL + '/category/'
+    categoryRestaurant: baseURL + '/category/',
+    searchResult: baseURL + '/restaurantsName',
+    userReviews: baseURL + '/user/reviews',
+    userFavorite: baseURL + '/user/favorites',
+    userCheck: baseURL + '/user/check'
 }

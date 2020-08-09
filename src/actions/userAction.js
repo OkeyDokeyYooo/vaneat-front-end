@@ -13,6 +13,7 @@ export const facebookLogin = (userInfo) => {
 }
 
 export const emailLogin = (userInfo) => {
+    console.log(userInfo)
     return {
         type: 'EMAIL_LOGIN',
         userInfo: userInfo

@@ -5,6 +5,7 @@ import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props
 import OutsideClickHandler from 'react-outside-click-handler'
 import Axios from 'axios'
 import { useAlert } from 'react-alert'
+import { useCookies } from 'react-cookie';
 
 // redux
 import { useDispatch } from 'react-redux'
@@ -53,7 +54,7 @@ const loginInitState = {
 
 const LoginForm = props => {
     const classes = useStyles()
-
+    const [cookies, setCookie] = useCookies(['access_token']);
     const [values, setValues] = useState(loginInitState)
 
     // redux
@@ -101,6 +102,7 @@ const LoginForm = props => {
                 password: values.password
             }).then(res => {
                 // console.log(res)
+                setCookie('access_token', res.data.token, {maxAge: 3600})
                 dispatch(emailLogin(res.data))
                 setValues(loginInitState)
                 props.setShowLogin(false)
@@ -155,6 +157,7 @@ const LoginForm = props => {
 const LoginWindow = (props) => {
 
     const [showLoginForm, setShowLoginForm] = useState(false)
+    const [cookies, setCookie] = useCookies(['access_token']);
     const alert = useAlert()
 
     // redux
@@ -165,6 +168,7 @@ const LoginWindow = (props) => {
             tokenId: res.tokenId
         }).then(response => {
             if (response.status === 200) {
+                setCookie('access_token', response.data.token, {maxAge: 3600})
                 dispatch(googleLogin(response.data))
                 props.setShowLogin(false)
             } else {
@@ -186,6 +190,7 @@ const LoginWindow = (props) => {
             userID: res.userID
         }).then(response => {
             if (response.status === 200) {
+                setCookie('access_token', response.data.token, {maxAge: 3600})
                 dispatch(facebookLogin(response.data))
                 props.setShowLogin(false)
             } else {

@@ -85,14 +85,14 @@ const DetailRestaurantPage = (props) => {
         .then(res => {
             if (res.status === 200){
                 let restData = res.data.restaurant
-                
+                console.log(restData)
                 setRestInfo(restData)
 
-                document.title = restData.name
+                document.title = restData.rest.name
 
-                if (restData.rate > 4.75){
+                if (restData.rest.rate > 4.75){
                     setRateColor("excellent")
-                } else if (restData.rate <= 4.75 || restData.rate > 4.5) {
+                } else if (restData.rest.rate <= 4.75 || restData.rest.rate > 4.5) {
                     setRateColor("good")
                 } else {
                     setRateColor("ok")
@@ -114,19 +114,19 @@ const DetailRestaurantPage = (props) => {
                 restInfo &&
                 <React.Fragment>
                     <div className="detail-restaurant-page-banner-wrapper">
-                        <img src={restInfo.banner} alt="../../img/food-banner.jpg"/>
+                        <img src={restInfo.rest.banner} alt="../../img/food-banner.jpg"/>
                     </div>
                     <div className="detail-restaurant-page-main-wrapper">
                         <section className="detail-restaurant-page-main-info">
-                            <h1>{restInfo.name}</h1>
+                            <h1>{restInfo.rest.name}</h1>
                             <div id="detail-page-rating-wrapper">
                                 <StyledRating 
-                                    value={Number(restInfo.rate)} 
+                                    value={Number(restInfo.rest.rate)} 
                                     readOnly 
                                     precision={0.5}
                                     size="large"    
                                 />
-                                <span className={`detail-restaurant-rate-txt ${rateColor}`}>{restInfo.rate}</span>
+                                <span className={`detail-restaurant-rate-txt ${rateColor}`}>{restInfo.rest.rate}</span>
                                 {/* <span id="detail-restaurant-num-rate">{restInfo.reviews.length} reviews</span> */}
                             </div>
                             <div id="detail-page-btn-section">
@@ -135,7 +135,7 @@ const DetailRestaurantPage = (props) => {
                                     <span>Add Review</span>
                                 </button>
                                 <button>
-                                    <a href={`http://maps.google.com/?q=${restInfo.address}`} target="_blank" el="noopener noreferrer">
+                                    <a href={`http://maps.google.com/?q=${restInfo.rest.address}`} target="_blank" el="noopener noreferrer">
                                         <MdDirections />
                                         <span>Direction</span>
                                     </a>
@@ -165,20 +165,20 @@ const DetailRestaurantPage = (props) => {
                         <section >
                             <h3>Location & Hours</h3>
                             <div className="detail-restaurant-location-hour-section">
-                                <a className="google-map-container" href={`http://maps.google.com/?q=${restInfo.address}`} target="_blank" el="noopener noreferrer">
+                                <a className="google-map-container" href={`http://maps.google.com/?q=${restInfo.rest.address}`} target="_blank" el="noopener noreferrer">
                                     <StaticGoogleMap size="315x150" className="img-fluid" apiKey="AIzaSyBRDDEjs_ExPf0quVz7YczSZhkeQv70QdY">
-                                        <Marker location={restInfo.address} color="red" />
+                                        <Marker location={restInfo.rest.address} color="red" />
                                     </StaticGoogleMap>
                                     <div className="google-map-address-container">
-                                        {restInfo.address}
+                                        {restInfo.rest.address}
                                     </div>
                                 </a>
                                 {
-                                    restInfo.hours && 
+                                    restInfo.rest.hours && 
                                     <table className="hours-table">
                                         <tbody>
                                         {   
-                                            Object.entries(restInfo.hours).map(([key, val]) => {
+                                            Object.entries(restInfo.rest.hours).map(([key, val]) => {
                                                 let currDay = moment().format('ddd')
                                                 let showOpening = false
                                                 let isOpening = false
@@ -209,7 +209,7 @@ const DetailRestaurantPage = (props) => {
                         <hr />
                         <section className="detail-restaurant-page-dishes-section">
                             <h3>Popular Dishes</h3>
-                            <DishesSlider dishes= {restInfo.dishes}/>
+                            <DishesSlider dishes= {restInfo.rest.dishes}/>
                         </section>
                         <hr />
                         <section className="detail-restaurant-page-reviews-section">
@@ -221,10 +221,10 @@ const DetailRestaurantPage = (props) => {
                                         <React.Fragment key={index}>
                                             <ReviewItem 
                                                 key={index} 
-                                                author={review.author}
+                                                author={review.username}
                                                 rate={review.rate}
                                                 review={review.review}
-                                                date={review.date}
+                                                date={moment(review.createdAt).format('lll')}
                                             />
                                             <hr />
                                         </React.Fragment>
@@ -237,7 +237,7 @@ const DetailRestaurantPage = (props) => {
             }
             {
                 showPopUp && restInfo &&
-                <ReviewWindow dishes={restInfo.dishes} setShowPopUp={setShowPopUp} restaurantId={restInfo._id}/>
+                <ReviewWindow dishes={restInfo.rest.dishes} setShowPopUp={setShowPopUp} restaurantId={restInfo.rest._id}/>
             }
             {
                 showAlert.show &&

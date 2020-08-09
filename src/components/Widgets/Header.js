@@ -1,8 +1,10 @@
-import React, { useState }from 'react'
+import React, { useState, useEffect }from 'react'
 import { Link, useLocation, useHistory } from 'react-router-dom'
 import {TextField, makeStyles} from '@material-ui/core'
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import OutsideClickHandler from 'react-outside-click-handler';
+import Axios from 'axios';
+import { useCookies } from 'react-cookie';
 
 // component
 import LoginWindow from '../Widgets/LoginWindow'
@@ -10,27 +12,13 @@ import SignupWindow from '../Widgets/SignupWindow'
 
 // redux
 import { useSelector, useDispatch } from 'react-redux'
-import { userLogout } from '../../actions/userAction'
+import { userLogout, emailLogin } from '../../actions/userAction'
 
 // icons
 import {FaRegUserCircle, BsPeopleCircle, RiLogoutBoxRLine} from 'react-icons/all'
 
 import './Widgets.css'
-
-const topRestaurants = [
-    { name: "Church's Chicken"},
-    { name: "Panago Pizza"},
-    { name: "Omega Pizza & Wings"},
-    { name: "Sango Japanese"},
-    { name: "Sky Dragon"},
-    { name: "Sakeya Sushi"},
-    { name: "McDonald's"},
-    { name: "Freshslice Pizza"},
-    { name: "Dairy Queen"},
-    { name: "Megabite Pizza"},
-    { name: "Nagano"},
-    { name: "Pizza Factory Tricity"},
-]
+import API from '../../API';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -49,29 +37,49 @@ const useStyles = makeStyles((theme) => ({
 const SearchBar = () => {
 
     const classes = useStyles()
+    const history = useHistory()
+    const [search, setSearch] = useState(undefined)
+
+    useEffect(() => {
+        Axios.get(API.searchResult)
+        .then(res => {
+            if (res.status === 200) {
+                setSearch(res.data.restaurantName)
+            }
+        }).catch(() => {
+            console.log("Error to Loading Search Result")
+        })
+    }, [])
+
     // when use click enter, then start search weather we have the restaurant
-    const handleChange  = (event) => {
-        console.log(event.target.value)
+    const handleChange  = (val, reason) => {
+        if (reason === 'select-option') {
+            const restaurantId = search.find(rest => rest.name === val).id
+            history.push(`/restaurants/${restaurantId}`)
+        }
     }
 
     return (
         <div id="restaurant-header-search-bar">
-            <Autocomplete
-                freeSolo
-                loadingText={'Loading...'}
-                onChange={e => handleChange(e)}
-                options={topRestaurants.map(option => option.name)}
-                renderInput={(params) => (
-                    <TextField 
-                        {...params}
-                        className={classes.root}
-                        size="small"
-                        margin="normal" 
-                        variant="outlined"
-                        placeholder="Search for Restaurant"
-                    />
-                )}
-            />
+            {
+                search &&
+                <Autocomplete
+                    freeSolo
+                    onChange={(e, val, reason) => handleChange(val, reason)}
+                    loadingText={'Loading...'}
+                    options={search.map(option => option.name)}
+                    renderInput={(params) => (
+                        <TextField 
+                            {...params}
+                            className={classes.root}
+                            size="small"
+                            margin="normal" 
+                            variant="outlined"
+                            placeholder="Search for Restaurant"
+                        />
+                    )}
+                />
+            }
         </div>
     )
 }
@@ -116,7 +124,24 @@ const Header = (props) => {
     const [showLogin, setShowLogin] = useState(false)
     const [showSignup, setShowSignup] = useState(false)
     const [showUserWindow, setShowUserWindow] = useState(false)
+    const [cookies, setCookie] = useCookies(['access_token']);
+    const dispatch = useDispatch()
 
+    useEffect(() => {
+        if (!user.isLogIn){
+            let { access_token } = cookies
+            Axios.get(API.userCheck, {
+                headers: {
+                    'Authorization': `Bearer ${access_token}`
+                }
+            }).then(res => {
+                if (res.status === 200){
+                    let storeData = {token: access_token, ...res.data}
+                    dispatch(emailLogin(storeData))
+                }
+            })
+        }
+    }, [])
 
     return (
         <React.Fragment>
