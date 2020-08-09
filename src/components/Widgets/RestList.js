@@ -3,35 +3,33 @@ import '../Widgets/Widgets.css'
 import RestList from './RestItem'
 import { useRouteMatch, Link} from 'react-router-dom'
 
-import fake from '../../fakeRest.json';
+// import fake from '../../fakeRest.json';
 
-const RestItems = () => {
+const RestItems = props => {
 
     const match = useRouteMatch()
 
     return (
         <div className="restaurant-list">
             {
-                fake.map((cats,index)=>{
+                props.allRest && 
+                props.allRest.map((restaurant,index)=>{
                     return(
                         <Link 
                             to={{
-                                pathname: `${match.url}/${cats.name}`,
-                                state: {
-                                    name: cats.name
-                                }
+                                pathname: `${match.url}/${restaurant._id}`
                             }}
                             key={index}
                         >
                             <RestList 
-                                img={cats.image}
-                                name={cats.name}
-                                location={cats.location}
-                                tel={cats.telephone}
-                                rate={cats.rate}
-                                numOfRate={cats.numOfRate}
-                                dollar={cats.dollar}
-                                type={cats.type}
+                                img={restaurant.image}
+                                name={restaurant.name}
+                                location={restaurant.address}
+                                tel={restaurant.phone_number}
+                                rate={restaurant.rate}
+                                numOfRate={restaurant.numOfRate}
+                                dollar={restaurant.average_price}
+                                type={restaurant.category}
                                 key={index}
                             />
                         </Link>

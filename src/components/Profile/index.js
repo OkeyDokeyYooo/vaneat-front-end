@@ -58,11 +58,11 @@ const Profile = props => {
                     </section>
                     {
                         section === "bookmarks" && 
-                        <FavoriteSection />
+                        <FavoriteSection userId={user.id}/>
                     } 
                     {
                         section === "reviews" &&
-                        <ReviewSection />
+                        <ReviewSection userId={user.id}/>
                     }
                 </div> :
                 <ErrorPage />

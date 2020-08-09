@@ -1,9 +1,19 @@
-import React from 'react'
+import React, { useEffect }from 'react'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 import fakeFavorite from '../../fakeFavorite.json'
+import API from '../../API'
 
 
 const BookmarkSection = props => {
+
+    useEffect(() => {
+        axios.get(API.userFavorite + props.userId)
+        .then(res => {
+            console.log(res)
+        })
+    }, [])
+
     return (
         <section className="profile-page-main-body">
             <div className="profile-page-favorite-section">

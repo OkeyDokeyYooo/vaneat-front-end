@@ -1,30 +1,48 @@
-import React, { Component } from "react";
+import React, {useState, useEffect}from "react";
 import Slider from "react-slick";
+import axios from 'axios'
 
 import CatItem from '../Widgets/CatItem'
-import cats from '../../fakeCat.json'
 import './Widgets.css'
-export default class MultipleItems extends Component {
-  render() {
-    const settings = {
-      dots: false,
-      infinite: true,
-      speed: 300,
-      slidesToShow: 4,
-      slidesToScroll: 4,
-  };
-    
-    return (
-      <Slider {...settings}>
-        {
-          cats.map((cat,i)=>{
-            return(
-              <CatItem title={cat.CatName} 
-                img={cat.img} key={i}/>
-            )
-          })
-        }
-      </Slider>
-    );
-  }
+import API from "../../API";
+
+const settings = {
+  dots: false,
+  infinite: true,
+  speed: 300,
+  slidesToShow: 4,
+  slidesToScroll: 4,
 }
+
+const Sliders = props => {
+
+  const [categories, setCategories] = useState(null)
+
+  useEffect(() => {
+    axios.get(API.allCategory)
+    .then(res => {
+      console.log(res)
+      setCategories(res.data.category)
+    })
+  }, [])
+
+
+  return (
+    <Slider {...settings}>
+      {
+        categories &&
+        categories.map((cat,i)=>{
+          return(
+            <CatItem 
+              title={cat.category_name} 
+              img={cat.image} 
+              key={i}
+            />
+          )
+        })
+      }
+    </Slider>
+  )
+}
+
+export default Sliders

@@ -135,6 +135,7 @@ const ReviewWindow = props => {
             data.set('rate', rate)
             data.set('dollar', dollar)
             data.set('favoriteDish', favoriteDish)
+            data.set('restaurantId', props.restaurantId)
 
             axios.post(
                 'http://localhost:8080/api/review',

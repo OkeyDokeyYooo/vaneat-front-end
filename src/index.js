@@ -19,7 +19,10 @@ const options = {
   // you can also just use 'bottom center'
   position: positions.TOP_CENTER,
   timeout: 5000,
-  offset: '30px',
+  offset: '100px',
+  containerStyle: {
+    zIndex: 1000,
+  },
   // you can also just use 'scale'
   transition: transitions.SCALE
 }

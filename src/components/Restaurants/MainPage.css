@@ -15,6 +15,17 @@
     font-weight: 500;
 }
 
+.back-to-all-span {
+    font-size: 0.6em;
+    font-weight: 400;
+    text-decoration: underline;
+    color: blue;
+    margin-left: 1em;
+}
+
+.back-to-all-span:hover {
+    cursor: pointer;
+}
 /* detail restaurant page */
 /* .detail-restaurant-page-banner-wrapper {
     margin-top: 1em;

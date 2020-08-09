@@ -6,7 +6,7 @@ import {
     StaticGoogleMap,
     Marker,
 } from 'react-static-google-map';
-import { useSelector } from 'react-redux';
+import { useSelector} from 'react-redux';
 
 // components
 import ReviewItem from '../Widgets/ReviewItem'
@@ -22,11 +22,11 @@ import { MdContentCopy, MdWarning} from 'react-icons/all'
 
 // need to get the detail information from backend 
 import fakeRest from '../../fakeRest.json'
+import Axios from 'axios';
+import API from '../../API';
 
 
-const DetailRestaurantPage = (props) => {
-    const name = props.match.params.restaurantName
-
+const DetailRestaurantPage = (props) => {    
     const user = useSelector(state => state.user)
     const [restInfo, setRestInfo] = useState(null)
     const [rateColor, setRateColor] = useState(null)
@@ -77,18 +77,28 @@ const DetailRestaurantPage = (props) => {
 
     // when this component mount to the DOM = componentDidMount
     useEffect(() => {
-        let restData = fakeRest.find(rest => rest.name === name)
-        setRestInfo(restData)
+        // let restData = fakeRest.find(rest => rest.name === name)
+        const id = props.match.params.restaurantId
+    
+        Axios
+        .get(API.detailRestaurant + id)
+        .then(res => {
+            if (res.status === 200){
+                let restData = res.data.restaurant
+                
+                setRestInfo(restData)
 
-        document.title = restData.name
+                document.title = restData.name
 
-        if (restData.rate > 4.75){
-            setRateColor("excellent")
-        } else if (restData.rate <= 4.75 || restData.rate > 4.5) {
-            setRateColor("good")
-        } else {
-            setRateColor("ok")
-        }
+                if (restData.rate > 4.75){
+                    setRateColor("excellent")
+                } else if (restData.rate <= 4.75 || restData.rate > 4.5) {
+                    setRateColor("good")
+                } else {
+                    setRateColor("ok")
+                }      
+            }
+        })
     }, [])
 
     // make background not scrolling
@@ -117,7 +127,7 @@ const DetailRestaurantPage = (props) => {
                                     size="large"    
                                 />
                                 <span className={`detail-restaurant-rate-txt ${rateColor}`}>{restInfo.rate}</span>
-                                <span id="detail-restaurant-num-rate">{restInfo.reviews.length} reviews</span>
+                                {/* <span id="detail-restaurant-num-rate">{restInfo.reviews.length} reviews</span> */}
                             </div>
                             <div id="detail-page-btn-section">
                                 <button id="add-review-btn" onClick={() => handleAddReview()}>
@@ -125,7 +135,7 @@ const DetailRestaurantPage = (props) => {
                                     <span>Add Review</span>
                                 </button>
                                 <button>
-                                    <a href={`http://maps.google.com/?q=${restInfo.location}`} target="_blank" el="noopener noreferrer">
+                                    <a href={`http://maps.google.com/?q=${restInfo.address}`} target="_blank" el="noopener noreferrer">
                                         <MdDirections />
                                         <span>Direction</span>
                                     </a>
@@ -155,42 +165,45 @@ const DetailRestaurantPage = (props) => {
                         <section >
                             <h3>Location & Hours</h3>
                             <div className="detail-restaurant-location-hour-section">
-                                <a className="google-map-container" href={`http://maps.google.com/?q=${restInfo.location}`} target="_blank" el="noopener noreferrer">
+                                <a className="google-map-container" href={`http://maps.google.com/?q=${restInfo.address}`} target="_blank" el="noopener noreferrer">
                                     <StaticGoogleMap size="315x150" className="img-fluid" apiKey="AIzaSyBRDDEjs_ExPf0quVz7YczSZhkeQv70QdY">
-                                        <Marker location={restInfo.location} color="red" />
+                                        <Marker location={restInfo.address} color="red" />
                                     </StaticGoogleMap>
                                     <div className="google-map-address-container">
-                                        {restInfo.location}
+                                        {restInfo.address}
                                     </div>
                                 </a>
-                                <table className="hours-table">
-                                    <tbody>
-                                    {   
-                                        Object.entries(restInfo.hours).map(([key, val]) => {
-                                            let currDay = moment().format('ddd')
-                                            let showOpening = false
-                                            let isOpening = false
-                                            // check if opening
-                                            if (currDay === key) {
-                                                showOpening = true
-                                                let timeArr = val.split(" - ")
-                                                let startTime = moment(timeArr[0], "h:mm a")
-                                                let endTime = moment(timeArr[1], "h:mm a")
-                                                if (moment().isBetween(startTime, endTime)) {
-                                                    isOpening = true
+                                {
+                                    restInfo.hours && 
+                                    <table className="hours-table">
+                                        <tbody>
+                                        {   
+                                            Object.entries(restInfo.hours).map(([key, val]) => {
+                                                let currDay = moment().format('ddd')
+                                                let showOpening = false
+                                                let isOpening = false
+                                                // check if opening
+                                                if (currDay === key) {
+                                                    showOpening = true
+                                                    let timeArr = val.split(" - ")
+                                                    let startTime = moment(timeArr[0], "h:mm a")
+                                                    let endTime = moment(timeArr[1], "h:mm a")
+                                                    if (moment().isBetween(startTime, endTime)) {
+                                                        isOpening = true
+                                                    }
                                                 }
-                                            }
-                                            return (
-                                                <tr key={key}>
-                                                    <th className="hours-table-col1">{key}</th>
-                                                    <th className="hours-table-col2">{val}</th> 
-                                                    <th className="hours-table-col3">{showOpening ? isOpening ? "Opening now" : "Closed now" : ""}</th>
-                                                </tr>
-                                            )
-                                        })
-                                    }
-                                    </tbody>
-                                </table>
+                                                return (
+                                                    <tr key={key}>
+                                                        <th className="hours-table-col1">{key}</th>
+                                                        <th className="hours-table-col2">{val}</th> 
+                                                        <th className="hours-table-col3">{showOpening ? isOpening ? "Opening now" : "Closed now" : ""}</th>
+                                                    </tr>
+                                                )
+                                            })
+                                        }
+                                        </tbody>
+                                    </table>
+                                }      
                             </div>
                         </section>
                         <hr />
@@ -200,8 +213,9 @@ const DetailRestaurantPage = (props) => {
                         </section>
                         <hr />
                         <section className="detail-restaurant-page-reviews-section">
-                            <h3>Reviews({restInfo.reviews.length})</h3>
-                            {
+                            <h3>Reviews</h3>
+                            {   
+                                restInfo.reviews &&
                                 restInfo.reviews.map((review, index) => {
                                     return (
                                         <React.Fragment key={index}>
@@ -223,7 +237,7 @@ const DetailRestaurantPage = (props) => {
             }
             {
                 showPopUp && restInfo &&
-                <ReviewWindow dishes={restInfo.dishes} setShowPopUp={setShowPopUp}/>
+                <ReviewWindow dishes={restInfo.dishes} setShowPopUp={setShowPopUp} restaurantId={restInfo._id}/>
             }
             {
                 showAlert.show &&
