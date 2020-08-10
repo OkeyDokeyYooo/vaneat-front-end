@@ -42,10 +42,14 @@ const RestItem = (props) =>{
                         precision={0.5}
                         size={"small"}    
                     />
-                    <span className={`restaurant-item-rate-txt ${rateColor}`}>{props.rate}</span>
-                    <span id="number-of-comments">{props.numOfRate} reviews</span>
+                    <span className={`restaurant-item-rate-txt ${rateColor}`}>{props.rate.toFixed(1)}</span>
+                    {/* <span id="number-of-comments">{props.numOfRate} reviews</span> */}
                     <em>|</em>
-                    <span id="number-of-dollar">{'$'.repeat(props.dollar)}</span>
+                    <span id="restaurant-item-rate-dollar">
+                        {   
+                            '$'.repeat(props.dollar)
+                        }
+                    </span>
                 </div>
                 <div className='restaurant-item-address-wrapper'>
                     <span>{props.type}</span>

@@ -27,7 +27,7 @@ const RestItems = props => {
                                 location={restaurant.address}
                                 tel={restaurant.phone_number}
                                 rate={restaurant.rate}
-                                numOfRate={restaurant.numOfRate}
+                                // numOfRate={restaurant.reviews.length}
                                 dollar={restaurant.average_price}
                                 type={restaurant.category}
                                 key={index}

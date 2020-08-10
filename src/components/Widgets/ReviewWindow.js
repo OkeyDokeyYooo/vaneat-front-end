@@ -76,6 +76,9 @@ const DollarRating = props => {
                 value={props.dollar}
                 size="large"
                 onChange={(event, newValue) => {
+                    if (newValue === null) {
+                        newValue = 0
+                    }
                     props.setDollar(newValue);
                 }}
                 onChangeActive={(event, newHover) => {
@@ -123,6 +126,7 @@ const ReviewWindow = props => {
     }
 
     const handleSubmit = () => {
+        console.log(dollar)
         const isValid = validateInput()
         if (isValid) {
             const data = new FormData()

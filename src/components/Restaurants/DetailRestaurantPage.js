@@ -9,6 +9,7 @@ import {
 import { useSelector, useDispatch} from 'react-redux';
 import { useAlert } from 'react-alert'
 import { addFavorite, removeFavorite} from '../../actions/userAction'
+import {Helmet} from "react-helmet";
 
 // components
 import ReviewItem from '../Widgets/ReviewItem'
@@ -30,7 +31,7 @@ const DetailRestaurantPage = (props) => {
     const dispatch = useDispatch()
     const alert = useAlert()
     const [restInfo, setRestInfo] = useState(null)
-    const [rateColor, setRateColor] = useState(null)
+    // const [rateColor, setRateColor] = useState(null)
     const [showPopUp, setShowPopUp] = useState(false)
     // const [showAlert, setShowAlert] = useState({
     //     show: false,
@@ -144,18 +145,16 @@ const DetailRestaurantPage = (props) => {
         .then(res => {
             if (res.status === 200){
                 let restData = res.data.restaurant
-                console.log(restData)
+                // console.log(restData)
                 setRestInfo(restData)
 
-                document.title = restData.rest.name
-
-                if (restData.rest.rate > 4.75){
-                    setRateColor("excellent")
-                } else if (restData.rest.rate <= 4.75 || restData.rest.rate > 4.5) {
-                    setRateColor("good")
-                } else {
-                    setRateColor("ok")
-                }      
+                // if (restData.rest.rate > 4.75){
+                //     setRateColor("excellent")
+                // } else if (restData.rest.rate <= 4.75 || restData.rest.rate > 4.5) {
+                //     setRateColor("good")
+                // } else {
+                //     setRateColor("ok")
+                // }      
             }
         })
     }, [])
@@ -172,6 +171,9 @@ const DetailRestaurantPage = (props) => {
             {
                 restInfo &&
                 <React.Fragment>
+                    <Helmet>
+                        <title>{restInfo.rest.name}</title>
+                    </Helmet>
                     <div className="detail-restaurant-page-banner-wrapper">
                         <img src={restInfo.rest.banner} alt="../../img/food-banner.jpg"/>
                     </div>
@@ -185,8 +187,19 @@ const DetailRestaurantPage = (props) => {
                                     precision={0.5}
                                     size="large"    
                                 />
-                                <span className={`detail-restaurant-rate-txt ${rateColor}`}>{restInfo.rest.rate}</span>
-                                {/* <span id="detail-restaurant-num-rate">{restInfo.reviews.length} reviews</span> */}
+                                <span className={`detail-restaurant-rate-txt`}>
+                                    {
+                                        restInfo.rest.rate > 0 &&
+                                        restInfo.rest.rate.toFixed(1)
+                                    }
+                                </span>
+                                <span id="detail-restaurant-num-rate">{restInfo.reviews.length} reviews</span>
+                                <span id="middle-dot">&middot;</span>
+                                <span id="number-of-dollar">
+                                    {   
+                                        '$'.repeat(restInfo.rest.average_price)
+                                    }
+                                </span>
                             </div>
                             <div id="detail-page-btn-section">
                                 <button id="add-review-btn" onClick={() => handleAddReview()}>
