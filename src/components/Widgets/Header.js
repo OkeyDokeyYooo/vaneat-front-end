@@ -149,7 +149,7 @@ const Header = (props) => {
     return (
         <React.Fragment>
             <header id="restaurant-header">
-                <Link id="restaurant-header-logo" to='/'>
+                <Link id="restaurant-header-logo" to='/restaurants'>
                         <span>LOGO</span>
                 </Link>
                 <SearchBar/>

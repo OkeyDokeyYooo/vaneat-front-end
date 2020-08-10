@@ -216,12 +216,43 @@ footer {
 }
 
 .footer{
-    
-    background-color: black;
-    height: 50px;
+    height: 200px;
+
+    /* background-color: #313131; */
+    color: white;
+    background: linear-gradient(rgb(255, 255, 255,0),rgb(49, 48, 48));
 }
 
 .contacts{
+    text-align: center;
+}
 
-    color: white;
+span{
+    vertical-align: middle;
+}
+
+.HZline{
+    padding-top: 10px;
+    margin-top: 30px;
+    border-top: 2px double white;
+}
+
+#cl1{
+    padding-left: 0%;
+    text-align: left;
+    float: left;
+    vertical-align: middle;
+}
+
+#cl2{
+    
+    text-align: left;
+}
+
+#cl2{
+
+}
+
+.ProductInfor{
+    
 }

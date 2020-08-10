@@ -2,6 +2,7 @@ import React, { useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import OutsideClickHandler from 'react-outside-click-handler';
 import { useCookies } from 'react-cookie';
+import { Helmet } from 'react-helmet'
 import Axios from 'axios'
 import API from '../../API'
 
@@ -66,6 +67,9 @@ const HomePage = (props) => {
 
     return (
         <div className="home-page">
+            <Helmet>
+                <title>VanEat</title>
+            </Helmet>
             <header >
                 <Link id="home-page-header-logo" to="/">
                     <span>LOGO</span>
@@ -104,11 +108,17 @@ const HomePage = (props) => {
                 <div className='footerclass'>
                     <h2> Contact us:</h2>
                     <div className='contacts'>
-                        <span>Yilun Huang: yha150@sfu.ca</span>
-                        <span>Weijie Sun: weijies@sfu.ca</span>
-                        <span>Yifan Liu: yla455@sfu.ca</span>
-                        <span>Dekai Lin: dekail@sfu.ca</span>
-                        <span>Zhiqi Qiao: zhiqiq@sfu.ca</span>
+                        <div id='cl1'>
+                            <div>Yilun Huang: yha150@sfu.ca</div>
+                            <div>Weijie Sun: weijies@sfu.ca</div>
+                            <div>Yifan Liu: yla455@sfu.ca</div>
+
+                        </div>
+                        <div id='cl2'>
+                            <div>Dekai Lin: dekail@sfu.ca</div>
+                            <div>Zhiqi Qiao: zhiqiq@sfu.ca</div>
+                        </div>
+                        
                     </div>
                     <div className='HZline'></div>
                     <div className='ProductInfo'>
