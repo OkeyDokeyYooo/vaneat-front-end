@@ -38,7 +38,7 @@ const BookmarkSection = props => {
                                     <div className="favorite-image-container">
                                         <img src={restaurant.image} alt={restaurant.name}/>
                                         <span id="favorite-restaurant-rate">
-                                            {restaurant.rate}
+                                            {restaurant.rate.toFixed(1)}
                                         </span>
                                     </div>
                                     <h3>

@@ -69,6 +69,11 @@
     color: #757280;
 }
 
+#middle-dot {
+    color: #757280;
+    margin: 0 5px;
+}
+
 .detail-restaurant-page-main-wrapper hr {
     height: 1px;
     background-color: #eeeeef;
