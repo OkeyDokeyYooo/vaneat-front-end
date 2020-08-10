@@ -207,7 +207,7 @@ const ReviewWindow = props => {
                     <ImageUploader
                         withIcon={true}
                         buttonText='Choose images'
-                        onChange={(pic) => {setUploadPic(prevState => prevState.concat(pic)); console.log(uploadPic)}}
+                        onChange={(pic) => {setUploadPic(prevState => prevState.concat(pic))}}
                         imgExtension={['.jpg', '.png']}
                         label={"Max file size: 5mb, accepted: jpg | png"}
                         maxFileSize={5242880}
