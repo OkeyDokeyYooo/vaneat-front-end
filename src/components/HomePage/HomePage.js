@@ -100,7 +100,30 @@ const HomePage = (props) => {
                 showSignup &&
                 <SignupWindow setShowLogin={setShowLogin} setShowSignup={setShowSignup} />
             }
-            {/* <footer>Footer</footer> */}
+            { <footer className='footer'>
+                <div className='footerclass'>
+                    <h2> Contact us:</h2>
+                    <div className='contacts'>
+                        <div id='cl1'>
+                            <div>Yilun Huang: yha150@sfu.ca</div>
+                            <div>Weijie Sun: weijies@sfu.ca</div>
+                            <div>Yifan Liu: yla455@sfu.ca</div>
+
+                        </div>
+                        <div id='cl2'>
+                            <div>Dekai Lin: dekail@sfu.ca</div>
+                            <div>Zhiqi Qiao: zhiqiq@sfu.ca</div>
+                        </div>
+                        
+                    </div>
+                    <div className='HZline'></div>
+                    <div className='ProductInfo'>
+                        <div>VanEat</div>
+                        <div>LOGO</div>
+                    </div>
+                    
+                </div>
+            </footer> }
         </div>
     )
 }
