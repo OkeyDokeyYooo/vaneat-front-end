@@ -215,3 +215,13 @@ footer {
     text-decoration: none;
 }
 
+.footer{
+    
+    background-color: black;
+    height: 50px;
+}
+
+.contacts{
+
+    color: white;
+}
