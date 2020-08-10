@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import {useSelector} from 'react-redux'
-
+import { Helmet } from 'react-helmet'
 // component
 import Header from '../Widgets/Header'
 import FavoriteSection from './FavoriteSection'
@@ -18,6 +18,9 @@ const Profile = props => {
 
     return (
         <div>
+            <Helmet>
+                <title>Profile</title>
+            </Helmet>
             <Header />
             { user.isLogIn ?
                 <div className="profile-page-wrapper">

@@ -21,7 +21,7 @@ const Sliders = props => {
   useEffect(() => {
     axios.get(API.allCategory)
     .then(res => {
-      console.log(res)
+      // console.log(res.data.category.length)
       setCategories(res.data.category)
     })
   }, [])
@@ -32,6 +32,7 @@ const Sliders = props => {
       {
         categories &&
         categories.map((cat,i)=>{
+          console.log(cat)
           return(
             <CatItem 
               title={cat.category_name} 

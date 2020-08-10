@@ -2,6 +2,7 @@ import React, { useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import OutsideClickHandler from 'react-outside-click-handler';
 import { useCookies } from 'react-cookie';
+import { Helmet } from 'react-helmet'
 import Axios from 'axios'
 import API from '../../API'
 
@@ -66,6 +67,9 @@ const HomePage = (props) => {
 
     return (
         <div className="home-page">
+            <Helmet>
+                <title>VanEat</title>
+            </Helmet>
             <header >
                 <Link id="home-page-header-logo" to="/">
                     <span>LOGO</span>
