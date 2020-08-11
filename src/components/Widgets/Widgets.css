@@ -1,3 +1,14 @@
+#van-eat-logo {
+    height: 80px;
+    width: 80px;
+}
+
+#van-eat-logo-container {
+    position: absolute;
+    left: 10px;
+    bottom: -15px;
+}
+
 .catclass{
     display: inline-block;
     margin: 0 auto;

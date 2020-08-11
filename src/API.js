@@ -12,5 +12,5 @@ module.exports = {
     userFavorite: baseURL + '/user/favorites',
     userCheck: baseURL + '/user/check',
     addFavorite: baseURL + '/user/userFavorite',
-    removeFavorite: baseURL + '/user/userUnfavorite'
+    removeFavorite: baseURL + '/user/userUnfavorite',
 }

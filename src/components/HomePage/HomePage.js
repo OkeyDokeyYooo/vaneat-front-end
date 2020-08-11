@@ -72,7 +72,7 @@ const HomePage = (props) => {
             </Helmet>
             <header >
                 <Link id="home-page-header-logo" to="/">
-                    <span>LOGO</span>
+                    <span><img src={require("../../img/logo3.png")} alt="VanEat" id="van-eat-logo"/></span>
                 </Link>
                 {
                     user.isLogIn ? 
@@ -123,7 +123,6 @@ const HomePage = (props) => {
                     <div className='HZline'></div>
                     <div className='ProductInfo'>
                         <div>VanEat</div>
-                        <div>LOGO</div>
                     </div>
                     
                 </div>

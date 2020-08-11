@@ -11,7 +11,7 @@ export default class MultipleItems extends Component {
       dots: false,
       infinite: true,
       speed: 300,
-      slidesToShow: 4,
+      slidesToShow: this.props.dishes.length < 4 ? this.props.dishes.length : 4,
       slidesToScroll: 4,
   };
     
@@ -20,8 +20,11 @@ export default class MultipleItems extends Component {
         {
           this.props.dishes.map((dish,i)=>{
             return(
-              <DishItems title={dish.tittle} 
-                img={dish.img} key={i}/>
+              <DishItems 
+                title={dish.dishName} 
+                img={dish.img} 
+                key={i}
+              />
             )
           })
         }

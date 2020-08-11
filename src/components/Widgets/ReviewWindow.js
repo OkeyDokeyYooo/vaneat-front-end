@@ -125,15 +125,22 @@ const ReviewWindow = props => {
         return true
     }
 
+    const onDrop = (picture) => {
+        setUploadPic(oldArray => [...oldArray, picture])
+    }
+
     const handleSubmit = () => {
-        console.log(dollar)
         const isValid = validateInput()
         if (isValid) {
             const data = new FormData()
 
-            for (const file of uploadPic) {
-                data.append('files[]', file, file.name);
+            if (uploadPic.length > 0) {
+                const uploadArray = uploadPic.slice(-1)[0]
+                for (const file of uploadArray) {
+                    data.append('files[]', file, file.name);
+                }
             }
+
             data.set('id', user.id)
             data.set('username', user.username)
             data.set('review', review)
@@ -207,7 +214,7 @@ const ReviewWindow = props => {
                     <ImageUploader
                         withIcon={true}
                         buttonText='Choose images'
-                        onChange={(pic) => {setUploadPic(prevState => prevState.concat(pic))}}
+                        onChange={onDrop}
                         imgExtension={['.jpg', '.png']}
                         label={"Max file size: 5mb, accepted: jpg | png"}
                         maxFileSize={5242880}

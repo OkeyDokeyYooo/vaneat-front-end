@@ -145,7 +145,7 @@ const DetailRestaurantPage = (props) => {
         .then(res => {
             if (res.status === 200){
                 let restData = res.data.restaurant
-                // console.log(restData)
+                console.log(restData.dishes)
                 setRestInfo(restData)
 
                 // if (restData.rest.rate > 4.75){
@@ -278,7 +278,7 @@ const DetailRestaurantPage = (props) => {
                         <hr />
                         <section className="detail-restaurant-page-dishes-section">
                             <h3>Popular Dishes</h3>
-                            <DishesSlider dishes= {restInfo.rest.dishes}/>
+                            <DishesSlider dishes= {restInfo.dishes}/>
                         </section>
                         <hr />
                         <section className="detail-restaurant-page-reviews-section">

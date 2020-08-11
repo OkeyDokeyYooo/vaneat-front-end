@@ -5,6 +5,7 @@ import { useSelector, useDispatch} from 'react-redux'
 import API from '../../API'
 import { useAlert } from 'react-alert'
 import { handleCategory } from '../../actions/categoryAction'
+import { Helmet } from 'react-helmet'
 
 // component
 import Slider from '../Widgets/Sliders'
@@ -73,6 +74,9 @@ const MainPage = () => {
 
     return (
         <div id="restaurant-main-page">
+            <Helmet>
+                <title>VanEat</title>
+            </Helmet>
             <Header />
             <Switch>
                 <Route path={`${match.path}/:restaurantId`} component={DetailRestaurant}/>

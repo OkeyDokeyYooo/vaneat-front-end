@@ -55,7 +55,7 @@ const SearchBar = () => {
     const handleChange  = (val, reason) => {
         if (reason === 'select-option') {
             const restaurantId = search.find(rest => rest.name === val).id
-            history.push(`/restaurants/${restaurantId}`)
+            history.go(`/restaurants/${restaurantId}`)
         }
     }
 
@@ -150,7 +150,7 @@ const Header = (props) => {
         <React.Fragment>
             <header id="restaurant-header">
                 <Link id="restaurant-header-logo" to='/restaurants'>
-                        <span>LOGO</span>
+                        <span id="van-eat-logo-container"><img src={require("../../img/logo2.png")} alt="VanEat" id="van-eat-logo"/></span>
                 </Link>
                 <SearchBar/>
                 {

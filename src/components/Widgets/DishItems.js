@@ -4,15 +4,14 @@ import '../Widgets/Widgets.css'
 
 const DishItems = (props) =>{
 
-    const imageStyle = {
-        backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6) ), url(${props.img})`,
-        // height: 140 ,
-        // width: 220
-    }
+
 
     return(
         <div className='dishclass'>
-            <img style={imageStyle} alt=""/>
+            {
+                props.img && 
+                <img src={props.img} style={{backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6) )`}} alt=""/>
+            }
             <div>
                 <span >{props.title}</span>
             </div>
