@@ -56,7 +56,6 @@ const SearchBar = () => {
         if (reason === 'select-option') {
             const restaurantId = search.find(rest => rest.name === val).id
             history.push(`/restaurants/${restaurantId}`)
-            history.go()
         }
     }
 

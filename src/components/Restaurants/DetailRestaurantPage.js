@@ -157,7 +157,7 @@ const DetailRestaurantPage = (props) => {
                 // }      
             }
         })
-    }, [])
+    }, [props.match.params.restaurantId])
 
     // make background not scrolling
     useEffect(() => {
