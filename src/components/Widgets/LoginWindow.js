@@ -113,7 +113,7 @@ const LoginForm = (props) => {
                 password: values.password,
             })
                 .then((res) => {
-                    // console.log(res)
+                    console.log(res);
                     setCookie("access_token", res.data.token, { maxAge: 3600 });
                     dispatch(emailLogin(res.data));
                     setValues(loginInitState);
@@ -121,6 +121,7 @@ const LoginForm = (props) => {
                 })
                 .catch((err) => {
                     // if there is error during authentication
+                    console.log(err);
                     setValues({
                         ...values,
                         emailError: "Authentication Failed!",
