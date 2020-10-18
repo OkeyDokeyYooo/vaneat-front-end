@@ -13,4 +13,7 @@ module.exports = {
     userCheck: baseURL + "/user/check",
     addFavorite: baseURL + "/user/userFavorite",
     removeFavorite: baseURL + "/user/userUnfavorite",
+    googleLogin: baseURL + "/api/user/google",
+    facebookLogin: baseURL + "/user/facebook",
+    addReview: baseURL + "/review",
 };
